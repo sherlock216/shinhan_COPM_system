@@ -5,59 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SECTOR 0</title>
 <link rel="icon" type="image/jpg" href="image/favicon.jpg">
-<style>
-    body {
-        font-family: 'Malgun Gothic', Arial;
-        margin: 0;
-        padding: 0;
-        background: #eee;
-    }
-    .header {
-        background: #ccc;
-        padding: 20px;
-        text-align: center;
-    }
-    .header h1 {
-        margin: 0;
-        font-size: 24px;
-        color: #333;
-    }
-    .survey-section{
-        background: #003366;
-        color: white;
-        padding: 20px;
-        margin-bottom: 10px;
-    }
-
-    .survey-section h2{
-        margin: 0 0 10px 0;
-    }
-    .survey-section input, .survey-section select {
-        width: 90%;
-        padding: 5px;
-        margin-top: 10px;
-    }
-    .container {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background: white;
-    }
-    .submit-button {
-        background-color: #0055a5;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        display: block;
-        width: 100%;
-        margin-top: 20px;
-    }
-
-</style>
+<link rel="stylesheet" href="sector.css">
 </head>
+
 <body>
     <div class="header">
         <h1>SECTOR 0. 기본 정보</h1>
@@ -67,8 +17,56 @@
         <div class="survey-section">
          <h2>1. 귀하의 생년 월일은?</h2>
          <label for="bday"></label>
-         <input type="date" id="bday"><br>
+         <input type="date" id="bdayid"><br>
         </div>
+        <div class="survey-section">
+         <h2>2. 귀하의 성별은?</h2>
+         <label for="gender"></label>
+         <input type="radio" id="male" name="gender" value="남자">
+         <label for="male">남자</label><br>
+
+         <input type="radio" id="female" name="gender" value="여자">
+         <label for="female">여자</label><br>
+        </div>
+        <div class="survey-section">
+            <h2>3. 귀하의 신장은?</h2>
+            <input type="number" name="height" placeholder="cm" id="heightid">
+        </div>
+        <div class="survey-section">
+            <h2>4. 귀하의 체중은?</h2>
+            <input type="number" name="weight" placeholder="kg" id="weightid">
+        </div>
+        <button onclick="location.href='sector1_start.html'"  id="submitBtn" class="submit-button">제출하기</button>    
     </div>
+
+
+
+    <script>
+        // 제출 버튼에 이벤트 리스너 추가?
+        document.getElementById('submitBtn').addEventListener('click', function() {
+
+            let birthday = document.getElementById('bdayid').value;
+            let sex = document.querySelector('input[name="gender"]:checked').value;
+            let height = document.getElementById('heightid').value;
+            let weight = document.getElementById('weightid').value;
+
+            let fullObj = { "생년 월일" : birthday, "성별": sex, "신장" : height, "체중" : weight};
+
+            //stringify, setItem
+            let jsonString = JSON.stringify(fullObj);
+            console.log("stringified json:", jsonString);
+            
+            localStorage.setItem('userData', jsonString);
+
+            // getItem
+            let storedData = localStorage.getItem('userData');
+            console.log(storedData);
+            //parse
+            let parsedObj = JSON.parse(storedData);
+            console.log("parsed:", parsedObj);
+        });
+    </script>
+
+
 </body>
 </html>

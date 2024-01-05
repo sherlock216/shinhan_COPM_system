@@ -46,7 +46,33 @@
             중 하나로 인식되고 있습니다.</p>
     </div>
 
+    <form id="genderForm">
+        <label for="gender">당신의 성별은 무엇입니까? 폼 라디오 테스트용 문항입니다.</label><br>
 
+        <input type="radio" id="male" name="gender" value="남자">
+        <label for="male">남자</label><br>
+
+        <input type="radio" id="female" name="gender" value="여자">
+        <label for="female">여자</label><br>
+
+        <input type="submit" value="제출">
+    </form>
+
+    <script>
+    document.getElementById('genderForm').addEventListener('submit', function(event) {
+            // 폼 제출 막기?
+            event.preventDefault();
+
+            
+            let userAnswer = document.querySelector('#genderForm input[name="gender"]:checked').value;
+
+            let responseObj = { "성별" : userAnswer };
+
+            let jsonString = JSON.stringify(responseObj);
+
+            console.log(jsonString);
+        });
+    </script>
 
 
 

@@ -1,0 +1,15 @@
+{id: "3239", email: "swab1011@hints.or.kr", title: "새 평가지 결과분석지",…}
+content: "<p>평가완료</p>"
+date_created: "2023-11-15T06:37:23.991726+00:00"
+dir: [{id: "12", title: "테스트3"}]
+email: "swab1011@hints.or.kr"
+folder: {id: "12"}
+id: "3239"
+is_show_poll_question: true
+paper: {id: "3283", title: "새 평가지", paper_type: "EVALUATION"}
+result: "{\"fields_name\": [\"\\uc774\\ub984\", \"\\uc774\\uba54\\uc77c\", \"\\uc81c\\ucd9c\\uc77c\\uc2dc\", \"\\uc81c\\ucd9c\\uc774\\uba54\\uc77c\", \"\\uc0c1\\ub2f4\\uadf8\\ub8f9\", \"\\uc218\\uc5c5\\uadf8\\ub8f9\", \"1-1(9976)\", \"2-1(9980)\", \"3-1(9979)\"], \"records\": [[\"\\uc774\\ub2e4\\ub77c\"], [\"swab1011@hints.or.kr\"], [\"2023-11-15\"], [\"swab1011@hints.or.kr\"], [\"-\"], [\"-\"], [\"testfg\"], [\"\\ub0a0\\uac1c\\uc640 \\uc758\\uc9c0\"], [\"\\uacf5\\uc791\"]], \"total_email_count\": 1, \"additional_fields_name\": [\"\", \"\", \"\", \"\", \"\", \"\", 16025, 16028, 16026], \"total_page\": 1, \"is_encoded\": [true]}"
+sheet: ""
+submitter: "{\"email\": \"swab1011@hints.or.kr\", \"name\": \"이다라\"}"
+thumbnail: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABZI
+title: "새 평가지 결과분석지"
+user: {id: "28905", email: "swab1011@hints.or.kr", full_name: "이다라", profile: {picture: "default_user.png"}}
