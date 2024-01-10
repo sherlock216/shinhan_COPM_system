@@ -2,19 +2,22 @@
     <head>
         <title>Coding Everybody Test</title>
         <meta charset="UTF-8">
+        <style>
+            li{
+                color:red;
+            }
+        </style>
     </head>
     <body>
         <h1>Test</h1>
         <p>For Javascript</p>
 
-        <input type="button" id="target" value="bon">
-
-        <script>
-            let t = document.getElementById('target');
-
-            t.addEventListener('click', function(event){
-                alert('Hello world, '+event.target.value);
-            });
-        </script>
+        <div id="cols">
+            <button class="btn">A</button>
+            <button class="btn">B</button>
+            <button class="btn">C</button>
+        </div>
+        
+        <li>HTML</li>
     </body>
 </html>

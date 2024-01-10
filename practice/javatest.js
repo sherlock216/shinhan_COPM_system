@@ -59,14 +59,14 @@ console.log(userList);
 
 //Array.isArray()
 
-let user2={
+let user22={
     name:"Mike",
     age:30,
 };
 let userList2=['Mike', 'Tom', 'Jane'];
-console.log(typeof user2);
+console.log(typeof user22);
 console.log(typeof userList2);
-console.log(Array.isArray(user2));
+console.log(Array.isArray(user22));
 console.log(Array.isArray(userList2));
 
 
@@ -103,7 +103,30 @@ let result4=userList4.reduce((prev, cur)=>{
 }, []);
 console.log(result4);
 
+function add(...numbers){
+    let result=numbers.reduce((prev, cur)=>prev+cur);
+    console.log(result);
+}
 
-let a=1;
-let b=2;
-[a,b]=[b,a];
+add(1,2,3);
+
+// Rest Parameter
+function User(name, age, ...skills){
+    this.name=name;
+    this.age=age;
+    this.skills=skills;
+}
+
+// Spread Syntax
+let user_s={name:"Mike"};
+let info={age:30};
+let fe=["JS","React"];
+let lang=["Korean", "English"];
+
+user_s={
+    ...user_s,
+    ...info,
+    skills: [...fe, ...lang],
+};
+
+console.log(user_s);
