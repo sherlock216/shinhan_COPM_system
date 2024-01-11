@@ -29,22 +29,22 @@
 
             <label for="content">1. 현재 귀하의 체형이 어떻다고 생각하십니까?</label><br><br>
 
-            <input type="radio" id="veryfat1" name="content" value=1>
-            <label for="veryfat1">매우 비만</label><br>
+            <input type="radio" id="veryfat" name="content" value=1>
+            <label for="veryfat">매우 비만</label><br>
     
-            <input type="radio" id="fat1" name="content" value=2>
-            <label for="fat1">약간 비만</label><br>
+            <input type="radio" id="fat" name="content" value=2>
+            <label for="fat">약간 비만</label><br>
     
-            <input type="radio" id="normal1" name="content" value=3>
-            <label for="normal1">보통</label><br>
+            <input type="radio" id="normal" name="content" value=3>
+            <label for="normal">보통</label><br>
     
-            <input type="radio" id="slim1" name="content" value=4>
-            <label for="slim1">약간 마름</label><br>
+            <input type="radio" id="slim" name="content" value=4>
+            <label for="slim">약간 마름</label><br>
     
-            <input type="radio" id="veryslim1" name="content" value=5>
-            <label for="veryslim1">매우 마름</label><br>
+            <input type="radio" id="veryslim" name="content" value=5>
+            <label for="veryslim">매우 마름</label><br>
 
-            <button onclick="location.href='sector1_2.html'"  id="submitBtn" class="submitBtn">다음</button>
+            <button id="submitBtn" class="submitBtn">다음</button>
         </form>
     </div>
     
@@ -53,12 +53,16 @@
 
     <script>
     
-    document.getElementById('submitBtn').addEventListener('click', function(event) {
-            // 폼 제출 막기?
+    document.getElementById('submitBtn').addEventListener('click', function() {
             event.preventDefault();
-            
             //ABC_temp1에 1-1번의 사용자 응답 저장
-            let answer1 = document.querySelector('#content input[name="content"]:checked').value;
+            let answer1 = document.querySelector('#content input[name="content"]:checked');
+            if(!answer1){
+                alert("모든 필드를 채워주세요.");
+                return;
+            }
+
+            answer1 = answer1.value;
 
             let ABC_temp1 = { 1 : parseInt(answer1)};
             let ABC_a={1:{},2:{},3:{},4:{}};
@@ -96,7 +100,9 @@
 
             
             sessionStorage.setItem('ABC_a', JSON.stringify(ABC_a));
-            sessionStorage.setItem('ABC_result', JSON.stringify(ABC_result));   
+            sessionStorage.setItem('ABC_result', JSON.stringify(ABC_result));
+            
+            location.href="sector1_2.html";
         });
     </script>
 

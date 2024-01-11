@@ -67,7 +67,7 @@
             <input type="number" name="weight" placeholder="kg" id="weightid">
         </div>
 
-        <button onclick="location.href='sector1_1.html'"  id="submitBtn" class="submitBtn">다음</button>    
+        <button id="submitBtn" class="submitBtn">다음</button>    
     </div>
 
 
@@ -75,11 +75,17 @@
     <script>
         // 제출 버튼에 이벤트 리스너 추가?
         document.getElementById('submitBtn').addEventListener('click', function() {
-
+            event.preventDefault();
             let birthday = document.getElementById('bdayid').value;
-            let sex = document.querySelector('input[name="gender"]:checked').value;
+            let sex = document.querySelector('input[name="gender"]:checked');
             let height = parseFloat(document.getElementById('heightid').value);
             let weight = parseFloat(document.getElementById('weightid').value);
+            if(!birthday || !sex || isNaN(height) || isNaN(weight)){
+                alert("모든 필드를 채워주세요.");
+                return;
+            }
+
+            sex = sex.value;
 
 
             let bmi_rare = weight / Math.pow(height / 100, 2);
@@ -94,7 +100,8 @@
 
             //stringify, setItem          
             let storedData = sessionStorage.setItem('ABC_sector0', JSON.stringify(ABC_sector0));
-
+            
+            location.href="sector1_1.html";
         });
     </script>
 

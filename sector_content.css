@@ -27,8 +27,6 @@ body {
 }
 
 
-
-
 .content {
     padding: 1em;
     line-height: 2;
@@ -68,4 +66,72 @@ input[type="radio"] {
 
 .submitBtn:hover {
     background-color: #190096;
+}
+
+
+/*feedback 구간 및 설명*/
+#textpos {
+    max-width: 1000px;
+    margin: auto;
+    padding: 50px;
+    background-color: white;
+    border-radius: 50px;
+    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1);
+    color: #333;
+    text-align: center; /* 텍스트 가운데 정렬 */
+    line-height: 1.6; /* 줄 간격 */
+    font-weight: bolder;
+}
+
+.feedback {
+    display: flex; 
+    justify-content: center; /* 가로축 가운데 정렬 */
+    align-items: center; /* 세로축 가운데 정렬 */
+    height: 200px; /* 높이 설정 */
+}
+
+
+
+.feedback p {
+    font-family: 'Malgun Gothic', 'Arial';
+    font-size: 16px;
+    line-height: 1.5;
+    
+}
+
+/* 자꾸 나란히 써지는 문제 발생으로 추가*/
+.feedback1 {
+    flex-direction: column;
+}
+
+.image-container {
+    display: flex;
+}
+
+.image {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.image img {
+    display: block;
+    width: 400px;
+    height: 300px;
+    border: 1px;
+    margin: auto;
+
+}
+
+
+.image p {
+    text-align: center;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+
+.too_many_feedback_in1_5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -30,67 +30,42 @@
             <label><input type="checkbox" name="content" value="7">7) 수면 부족</label><br>
 
             <!--<button class="submitBtn" id="submitBtn" type="submit">다음</button>-->
-            <button onclick="location.href='sector1_3.html'"  id="submitBtn" class="submitBtn">다음</button>
+            <button id="submitBtn" class="submitBtn">다음</button>
         </form>
     </div>
 
 
     <script>
         document.getElementById('submitBtn').addEventListener('click', function(event) {
-                // 폼 제출 막기?
                 event.preventDefault();
+               
+                let answer3_array = Array.from(document.querySelectorAll('#content input[name="content"]:checked'));
+                let answer3 = answer3_array.map(checkbox => checkbox.value);
+                // 체크박스의 NodeList를 배열로 변환하여 ABC_temp1에 보관
+                ////let checkboxes = Array.from(document.querySelectorAll('input[name="content"]'));
+                ////let answer3_1 = checkboxes.filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+                // let answer3_1 = checkboxes.map(checkbox => checkbox.checked ? checkbox.value : 0);
                 
-                //ABC_temp1에 1-2번의 사용자 응답 저장
-                let answer3 = document.querySelectorAll('#content input[name="content"]:checked');
-                /*let ABC_temp1 = JSON.parse(sessionStorage.getItem('ABC_temp1'));
-                ABC_temp1[2] = parseInt(answer2);
-                
+                let ABC_temp1 = JSON.parse(sessionStorage.getItem('ABC_temp1'));
+                ABC_temp1[3] = answer3;
                 let jsonString = JSON.stringify(ABC_temp1);
                 sessionStorage.setItem('ABC_temp1', jsonString);
 
-    
-                //parse
-                let storedData = sessionStorage.getItem('ABC_temp1');
-                let parsedObj = JSON.parse(storedData);
-                
-    
-    
-                //parse in sector0
-                let storedData0 = sessionStorage.getItem('ABC_sector0');
-    
-                let parsedObj0 = JSON.parse(storedData0);
 
-                //parse in ABC_a, ABC_result
+                //parse in ABC_a
                 let ABC_a = JSON.parse(sessionStorage.getItem('ABC_a'));
-                let ABC_result = JSON.parse(sessionStorage.getItem('ABC_result'));
 
-    
-                //sector0의 성별에 따라 다른 sector1-2의 정답
-                if(parsedObj0["성별"]=="남자"){
-                    if(parsedObj[2]==1 || parsedObj[2]==2){
-                        ABC_a[1][2] = 0; //정답
-                    }
-                    else{
-                        ABC_a[1][2] = 1;
-                    }
+
+                if(answer3.length == 7){
+                    ABC_a[1][3] = 0;
                 }
-                else{
-                    if(parsedObj[2]==4 || parsedObj[2]==5){
-                        ABC_a[1][2] = 0; //정답
-                    }
-                    else{
-                        ABC_a[1][2] = 1;
-                    }
+                else {
+                    ABC_a[1][3] = 1;
                 }
-    
-                //sector1의 유형 결정
-                if(ABC_a[1][1]==0 && ABC_a[1][2]==0) ABC_result[1]='W';
-                else ABC_result[1]='P';
-    
-    
     
                 sessionStorage.setItem('ABC_a', JSON.stringify(ABC_a));
-                sessionStorage.setItem('ABC_result', JSON.stringify(ABC_result));*/   
+
+                location.href='sector1_4.html'
             });
     </script>
 

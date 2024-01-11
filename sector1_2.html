@@ -41,31 +41,37 @@
             </script>
 
 
-            <input type="radio" id="veryfat2" name="content" value=1>
-            <label for="veryfat2">매우 비만</label><br>
+            <input type="radio" id="veryfat" name="content" value=1>
+            <label for="veryfat">매우 비만</label><br>
     
-            <input type="radio" id="fat2" name="content" value=2>
-            <label for="fat2">약간 비만</label><br>
+            <input type="radio" id="fat" name="content" value=2>
+            <label for="fat">약간 비만</label><br>
     
-            <input type="radio" id="normal2" name="content" value=3>
-            <label for="normal2">보통</label><br>
+            <input type="radio" id="normal" name="content" value=3>
+            <label for="normal">보통</label><br>
     
-            <input type="radio" id="slim2" name="content" value=4>
-            <label for="slim2">약간 마름</label><br>
+            <input type="radio" id="slim" name="content" value=4>
+            <label for="slim">약간 마름</label><br>
     
-            <input type="radio" id="veryslim2" name="content" value=5>
-            <label for="veryslim2">매우 마름</label><br>
-            <button onclick="location.href='sector1_3.html'"  id="submitBtn" class="submitBtn">다음</button>
+            <input type="radio" id="veryslim" name="content" value=5>
+            <label for="veryslim">매우 마름</label><br>
+            <button id="submitBtn" class="submitBtn">다음</button>
         </form>
     </div>
 
     <script>
         document.getElementById('submitBtn').addEventListener('click', function(event) {
-                // 폼 제출 막기?
                 event.preventDefault();
                 
                 //ABC_temp1에 1-2번의 사용자 응답 저장
-                let answer2 = document.querySelector('#content input[name="content"]:checked').value;
+                let answer2 = document.querySelector('#content input[name="content"]:checked');
+                
+                if(!answer2){
+                    alert("모든 필드를 채워주세요.");
+                    return;
+                }
+
+                answer2 = answer2.value;
 
                 let ABC_temp1 = JSON.parse(sessionStorage.getItem('ABC_temp1'));
                 ABC_temp1[2] = parseInt(answer2);
@@ -115,13 +121,14 @@
     
     
                 sessionStorage.setItem('ABC_a', JSON.stringify(ABC_a));
-                sessionStorage.setItem('ABC_result', JSON.stringify(ABC_result));   
+                sessionStorage.setItem('ABC_result', JSON.stringify(ABC_result)); 
+                
+                location.href='sector1_2_feedback.html'
             });
         </script>
     
     
     
     
-    </body>
-    </html>
-    
+</body>
+</html>

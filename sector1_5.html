@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECTOR 1</title>
+<link rel="icon" type="image/jpg" href="image/favicon.jpg">
+<link rel="stylesheet" href="sector_content.css">
+
+</head>
+
+<body>
+    <div class="header">
+        <h1>SECTOR 1. 인식</h1>
+        <p>Well / Poorly recognized</p>
+    </div>
+
+    <div class="content">
+        <form id="content" action="">
+
+            <p>5. 비만으로 인해 발생할 수 있는 건강 문제인 것을 모두 고르시오.</p><br><br>
+
+            <label><input type="checkbox" name="content" value="1">담석증 : 담관이나 담낭(쓸개)에 돌이 생기는 질환</label><br>
+            <label><input type="checkbox" name="content" value="2">폐쇄성 수면 무호흡증 : 잠자는 동안 숨쉬기를 멈추는 증상</label><br>
+            <div id="q3"><label><input type="checkbox" name="content" value="3">불규칙한 생리</label><br></div>
+            <div id="q4"><label><input type="checkbox" name="content" value="4">다낭성 난소 증후군 : 비정상적 월경, 난소에 여러 개의 물혹이 생기거나 몸에 털이 많아지는 증상을 동반하는 질환</label><br></div>
+            <label><input type="checkbox" name="content" value="5">난임증 : 임신에 어려움을 겪는 것</label><br>
+            <label><input type="checkbox" name="content" value="6">성욕감퇴</label><br>
+            <label><input type="checkbox" name="content" value="7">우울증</label><br>
+            <label><input type="checkbox" name="content" value="8">퇴행성 관절염 : 관절 주변이 닳아 염증과 통증이 생기는 질환</label><br>
+            <label><input type="checkbox" name="content" value="9">통풍 : 요산이 관절주변에 쌓이는 질환</label><br>
+            
+            <script>             
+                document.addEventListener('DOMContentLoaded', function() {
+                    let temp = JSON.parse(sessionStorage.getItem('ABC_sector0'));
+                    
+                    if(temp["성별"] == "남자") {
+                        document.getElementById('q3').style.display = 'none';
+                        document.getElementById('q4').style.display = 'none';
+                    }
+                });
+            </script>
+
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+                // 폼 제출 막기?
+                event.preventDefault();
+               
+                let answer5_array = Array.from(document.querySelectorAll('#content input[name="content"]:checked'));
+                let answer5 = answer5_array.map(checkbox => checkbox.value);
+   
+                let ABC_temp1 = JSON.parse(sessionStorage.getItem('ABC_temp1'));
+                ABC_temp1[5] = answer5;
+                let jsonString = JSON.stringify(ABC_temp1);
+                sessionStorage.setItem('ABC_temp1', jsonString);
+
+
+                //parse in ABC_a
+                let ABC_a = JSON.parse(sessionStorage.getItem('ABC_a'));
+                let temp2 = JSON.parse(sessionStorage.getItem('ABC_sector0'));
+
+                if(temp2["성별"]=="남자" && answer5.length == 7 || temp2["성별"]=="여자" && answer5.length == 9){
+                    ABC_a[1][5]=0;
+                }
+                else {
+                    ABC_a[1][5]=1;
+                }
+    
+                sessionStorage.setItem('ABC_a', JSON.stringify(ABC_a));
+
+                location.href='sector1_5_feedback.html'
+            });      
+    </script>
+
+
+    
+</body>
+</html>
