@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECTOR 1</title>
+    <link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+    <link rel="stylesheet" href="../css/sector_content.css">
+
+</head>
+
+
+<body>
+
+    <div class="header">
+        <h1>SECTOR 1. 인식</h1>
+        <p>Well / Poorly recognized</p>
+    </div>
+
+    <div class="intro">
+        <p>1996년 세계보건기구는 '<b><span style="color: red">비만</span></b>은
+            장기 치료가 필요한 질병'으로 규정하였습니다.<br>
+            그 이후 비만은 현 인류가 극복해야 할 중요한 <b><span style="color: red">질병</span></b>
+            중 하나로 인식되고 있습니다.</p>
+    </div>
+
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">1. 현재 귀하의 체형이 어떻다고 생각하십니까?</label><br><br>
+
+            <input type="radio" id="veryfat" name="content" value=1>
+            <label for="veryfat">매우 비만</label><br>
+
+            <input type="radio" id="fat" name="content" value=2>
+            <label for="fat">약간 비만</label><br>
+
+            <input type="radio" id="normal" name="content" value=3>
+            <label for="normal">보통</label><br>
+
+            <input type="radio" id="slim" name="content" value=4>
+            <label for="slim">약간 마름</label><br>
+
+            <input type="radio" id="veryslim" name="content" value=5>
+            <label for="veryslim">매우 마름</label><br>
+
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+
+    <script>
+
+        document.getElementById('submitBtn').addEventListener('click', function () {
+            event.preventDefault();
+
+            //parse in sector0
+            let storedData0 = sessionStorage.getItem('ABC_sector0');
+
+            let parsedObj0 = JSON.parse(storedData0);
+
+            //값 없이 이 페이지로 바로 들어온 경우(1-1문항만 테스트 해 보았음. 다른 문항에도 적용해야함.)
+            if (!parsedObj0) {
+                alert('신체 정보가 없습니다. Sector 0 설문부터 진행해주세요.');
+                location.href = "../sector0.html";
+            }
+
+
+            //ABC_temp1에 1-1번의 사용자 응답 저장
+            let answer1 = document.querySelector('#content input[name="content"]:checked');
+            if (!answer1) {
+                alert("모든 필드를 채워주세요.");
+                return;
+            }
+
+            answer1 = answer1.value;
+
+            let ABC_temp1 = { 1: parseInt(answer1) };
+            let ABC_a = { 1: {}, 2: {}, 3: {}, 4: {} };
+            let ABC_result = {};
+
+            sessionStorage.setItem('ABC_temp1', JSON.stringify(ABC_temp1));
+
+            //parse
+            let parsedObj = JSON.parse(sessionStorage.getItem('ABC_temp1'));
+
+
+
+
+
+            //sector0의 BMI 데이터와 sector1-1 사용자 대답의 비교 통해 1-1 정답 도출
+            if (parsedObj0["BMI"] == 4) {
+                if (parsedObj[1] == 4 || parsedObj[1] == 5) {
+                    ABC_a[1][1] = 0; //정답
+                }
+                else {
+                    ABC_a[1][1] = parsedObj0["BMI"] - parsedObj[1];
+                }
+            }
+            else {
+                if (parsedObj0["BMI"] - parsedObj[1] == 0) {
+                    ABC_a[1][1] = 0; //정답
+                }
+                else {
+                    ABC_a[1][1] = parsedObj0["BMI"] - parsedObj[1];
+                }
+            }
+
+
+            sessionStorage.setItem('ABC_a', JSON.stringify(ABC_a));
+            sessionStorage.setItem('ABC_result', JSON.stringify(ABC_result));
+
+            location.href = "sector1_2.html";
+        });
+    </script>
+
+</body>
+
+</html>

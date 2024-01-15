@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECTOR 1</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/sector_content.css">
+
+</head>
+
+
+<body>
+    <div class="header">
+        <h1>SECTOR 1. 인식</h1>
+        <p>Well / Poorly recognized</p>
+    </div>
+    <br><br><br>
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">2. 사진 속 사람이 비만이라고 생각하시나요?</label><br><br>
+
+            <div id="imagepos"></div><br><br>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    let temp = JSON.parse(sessionStorage.getItem('ABC_sector0'));
+                    if(!temp){
+                    alert('신체 정보가 없습니다. Sector 0 설문부터 진행해주세요.');
+                    location.href = "../sector0.html";
+                    }   
+                    
+                    let imagefile = document.createElement('img');
+                    
+                    if(temp["성별"] == "남자") {
+                        imagefile.src = "../image/1-2-man.jpg";
+                        imagefile.alt = "남자 사진";
+                    } else {
+                        imagefile.src = "../image/1-2-woman.jpg";
+                        imagefile.alt = "여자 사진";
+                    }  
+                    document.getElementById('imagepos').appendChild(imagefile);
+                });
+            </script>
+
+
+            <input type="radio" id="veryfat" name="content" value=1>
+            <label for="veryfat">매우 비만</label><br>
+    
+            <input type="radio" id="fat" name="content" value=2>
+            <label for="fat">약간 비만</label><br>
+    
+            <input type="radio" id="normal" name="content" value=3>
+            <label for="normal">보통</label><br>
+    
+            <input type="radio" id="slim" name="content" value=4>
+            <label for="slim">약간 마름</label><br>
+    
+            <input type="radio" id="veryslim" name="content" value=5>
+            <label for="veryslim">매우 마름</label><br>
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+
+                //parse in sector0
+                let storedData0 = sessionStorage.getItem('ABC_sector0');
+                let parsedObj0 = JSON.parse(storedData0);
+
+                //ABC_temp1에 1-2번의 사용자 응답 저장
+                let answer2 = document.querySelector('#content input[name="content"]:checked');
+                if(!answer2){
+                    alert("모든 필드를 채워주세요.");
+                    return;
+                }
+
+                answer2 = answer2.value;
+
+                let ABC_temp1 = JSON.parse(sessionStorage.getItem('ABC_temp1'));
+                ABC_temp1[2] = parseInt(answer2);
+                
+                let jsonString = JSON.stringify(ABC_temp1);
+                sessionStorage.setItem('ABC_temp1', jsonString);
+
+    
+                //parse
+                let storedData = sessionStorage.getItem('ABC_temp1');
+                let parsedObj = JSON.parse(storedData);
+                
+
+                //parse in ABC_a, ABC_result
+                let ABC_a = JSON.parse(sessionStorage.getItem('ABC_a'));
+                let ABC_result = JSON.parse(sessionStorage.getItem('ABC_result'));
+
+    
+                //sector0의 성별에 따라 다른 sector1-2의 정답
+                if(parsedObj0["성별"]=="남자"){
+                    if(parsedObj[2]==1 || parsedObj[2]==2){
+                        ABC_a[1][2] = 0; //정답
+                    }
+                    else{
+                        ABC_a[1][2] = 1;
+                    }
+                }
+                else{
+                    if(parsedObj[2]==4 || parsedObj[2]==5){
+                        ABC_a[1][2] = 0; //정답
+                    }
+                    else{
+                        ABC_a[1][2] = 1;
+                    }
+                }
+    
+                //sector1의 유형 결정
+                if(ABC_a[1][1]==0 && ABC_a[1][2]==0) ABC_result[1]='W';
+                else ABC_result[1]='P';
+    
+    
+    
+                sessionStorage.setItem('ABC_a', JSON.stringify(ABC_a));
+                sessionStorage.setItem('ABC_result', JSON.stringify(ABC_result)); 
+                
+                location.href='sector1_2_feedback.html'
+            });
+        </script>
+    
+    
+    
+    
+</body>
+</html>

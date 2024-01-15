@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECTOR 2</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/sector_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>SECTOR 2. 건강</h1>
+        <p>Healthy / Unhealthy</p>
+    </div>
+    <br><br><br>
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">4. 귀하는 최근 한달 간 우울감을 경험한 적이 있나요?</label><br><br>
+
+            <input type="radio" id="always" name="content" value=1>
+            <label for="always">1) 항상 우울하다</label><br>
+    
+            <input type="radio" id="often" name="content" value=2>
+            <label for="often">2) 자주 우울하다</label><br>
+    
+            <input type="radio" id="some" name="content" value=3>
+            <label for="some">3) 가끔 우울하다</label><br>
+    
+            <input type="radio" id="never" name="content" value=4>
+            <label for="never">4) 전혀 우울하지 않다</label><br>
+    
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+
+                let answer4 = document.querySelector('#content input[name="content"]:checked');
+                if(!answer4){
+                    alert("모든 필드를 채워주세요.");
+                    return;
+                }
+
+                answer4 = answer4.value;
+
+                let ABC_temp2 = JSON.parse(sessionStorage.getItem('ABC_temp2'));
+                ABC_temp2[4] = parseInt(answer4);
+                let jsonString = JSON.stringify(ABC_temp2);
+                sessionStorage.setItem('ABC_temp2', jsonString);
+                
+
+                //parse in ABC_a
+                let ABC_a = JSON.parse(sessionStorage.getItem('ABC_a'));
+
+    
+                if(answer4 == 1 || answer4 == 2){
+                    ABC_a[2][4] = 1;
+                }
+                else{
+                    ABC_a[2][4] = 0;
+                }
+    
+                sessionStorage.setItem('ABC_a', JSON.stringify(ABC_a));
+                
+                location.href='sector2_5.html'
+            });
+        </script>
+    
+    
+    
+    
+</body>
+</html>

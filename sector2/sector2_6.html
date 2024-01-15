@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECTOR 2</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/sector_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>SECTOR 2. 건강</h1>
+        <p>Healthy / Unhealthy</p>
+    </div>
+    <br><br><br>
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">6. 귀하는 하루에 보통 몇 시간 주무십니까?</label><br><br>
+
+            <input type="radio" id="5" name="content" value=1>
+            <label for="5">1) 5시간 미만</label><br>
+    
+            <input type="radio" id="6" name="content" value=2>
+            <label for="6">2) 5시간 이상 -6시간 미만</label><br>
+    
+            <input type="radio" id="7" name="content" value=3>
+            <label for="7">3) 6시간 이상 -7시간 미만</label><br>
+    
+            <input type="radio" id="8" name="content" value=4>
+            <label for="8">4) 7시간 이상 -9시간 미만</label><br>
+    
+            <input type="radio" id="9" name="content" value=5>
+            <label for="9">5) 9시간 이상</label><br>
+        
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+
+                let answer6 = document.querySelector('#content input[name="content"]:checked');
+                if(!answer6){
+                    alert("모든 필드를 채워주세요.");
+                    return;
+                }
+
+                answer6 = answer6.value;
+
+                let ABC_temp2 = JSON.parse(sessionStorage.getItem('ABC_temp2'));
+                ABC_temp2[6] = parseInt(answer6);
+                let jsonString = JSON.stringify(ABC_temp2);
+                sessionStorage.setItem('ABC_temp2', jsonString);
+                
+
+                //parse in ABC_a
+                let ABC_a = JSON.parse(sessionStorage.getItem('ABC_a'));
+
+    
+                if(answer6 == 1 || answer6 == 2 || answer6 == 5){
+                    ABC_a[2][6] = 1;
+                }
+                else{
+                    ABC_a[2][6] = 0;
+                }
+    
+                sessionStorage.setItem('ABC_a', JSON.stringify(ABC_a));
+                
+                if(answer6 == 3 || answer6 == 4){
+                    location.href='sector2_result.html';
+                    return;
+                }
+                location.href='sector2_feedback.html';
+            });
+        </script>
+    
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECTOR 2</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/sector_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>SECTOR 2. 건강</h1>
+        <p>Healthy / Unhealthy</p>
+    </div>
+
+    <div class="content">
+        <form id="content" action="">
+
+            <p>2. 현재 통증 혹은 기타 증상이 있는 부위를 모두 고르세요.</p><br><br>
+
+            <label><input type="checkbox" name="content" value="1">1) 목</label><br>
+            <label><input type="checkbox" name="content" value="2">2) 어깨</label><br>
+            <label><input type="checkbox" name="content" value="3">3) 허리/고관절</label><br>
+            <label><input type="checkbox" name="content" value="4">4) 팔꿈치</label><br>
+            <label><input type="checkbox" name="content" value="5">5) 손목</label><br>
+            <label><input type="checkbox" name="content" value="6">6) 무릎</label><br>
+            <label><input type="checkbox" name="content" value="7">7) 발목</label><br>
+            <br>
+            <div class="image-container">
+                <div class="image">
+                    <img src="../image/2-23.jpg" alt="2-23그림">
+                </div>
+            </div>
+            
+
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+
+                event.preventDefault();
+               
+                let answer2_array = Array.from(document.querySelectorAll('#content input[name="content"]:checked'));
+                let answer2 = answer2_array.map(checkbox => checkbox.value);
+
+                let ABC_temp2 = JSON.parse(sessionStorage.getItem('ABC_temp2'));
+                ABC_temp2[2] = answer2;
+                let jsonString = JSON.stringify(ABC_temp2);
+                sessionStorage.setItem('ABC_temp2', jsonString);
+
+                //parse in ABC_a
+                let ABC_a = JSON.parse(sessionStorage.getItem('ABC_a'));
+
+
+                if(answer2.length == 0){
+                    ABC_a[2][2] = 0;
+                }
+                else {
+                    ABC_a[2][2] = 1;
+                }
+    
+                sessionStorage.setItem('ABC_a', JSON.stringify(ABC_a));
+
+                location.href='sector2_3.html'
+            });      
+    </script>
+
+</body>
+</html>
