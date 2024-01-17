@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECTOR 3</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/sector_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>SECTOR 3. 운동</h1>
+        <p>Single / Cooperation</p>
+    </div>
+
+    <div class="content">
+        <form id="content" action="">
+
+            <p>3. 귀하가 선호하는 운동을 하지 못하는 이유는 무엇인가요? <b>(다중선택)</b></p>
+
+            <label><input type="checkbox" name="content" value=1>1) 시간 부족</label><br>
+            <label><input type="checkbox" name="content" value=2>2) 경제적 부담</label><br>
+            <label><input type="checkbox" name="content" value=3>3) 접근성</label><br>
+            <label><input type="checkbox" name="content" value=4>4) 귀찮음</label><br>
+            <label><input type="checkbox" name="content" value=5>5) 질병 혹은 부상</label><br>
+            <label><input type="checkbox" name="content" value=6>6) 선호하는 운동을 하고 있음</label><br>
+            <br>
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+
+                event.preventDefault();
+               
+                let answer_array = Array.from(document.querySelectorAll('#content input[name="content"]:checked'));
+                let answer = answer_array.map(checkbox => parseInt(checkbox.value));
+
+                if(answer.length==0){
+                    alert("모든 필드를 채워주세요.");
+                    return;
+                }
+
+                let ABC_temp3 = JSON.parse(sessionStorage.getItem('ABC_temp3'));
+                ABC_temp3[3] = answer;
+                let jsonString = JSON.stringify(ABC_temp3);
+                sessionStorage.setItem('ABC_temp3', jsonString);
+
+                location.href='sector3_3_feedback.html'
+            });      
+    </script>
+
+</body>
+</html>  

@@ -127,7 +127,10 @@
             let stringifiedData = JSON.stringify(sector0);
             let storedData = sessionStorage.setItem('ABC_sector0', stringifiedData);
 
+            location.href = "sector1/sector1_start.html";
 
+/* NODE.js 부분 */
+/*
             fetch('http://localhost:3000/submit', {
                 method: 'POST',
                 headers: {
@@ -143,6 +146,7 @@
                 .catch((error) => {
                     console.warn(error);
                 });
+*/
         });
     </script>
 

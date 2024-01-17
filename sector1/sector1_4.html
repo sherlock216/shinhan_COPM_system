@@ -21,11 +21,11 @@
 
             <p>4. 비만 관리를 위한 방법으로 옳은 것을 모두 고르시오.</p><br><br>
 
-            <label><input type="checkbox" name="content" value="1">1) 신체 활동량 및 운동량 증가</label><br>
-            <label><input type="checkbox" name="content" value="2">2) 식이요법</label><br>
-            <label><input type="checkbox" name="content" value="3">3) 스트레스 조절</label><br>
-            <label><input type="checkbox" name="content" value="4">4) 충분한 수면</label><br>
-            <label><input type="checkbox" name="content" value="5">5) 금주</label><br>
+            <label><input type="checkbox" name="content" value=1>1) 신체 활동량 및 운동량 증가</label><br>
+            <label><input type="checkbox" name="content" value=2>2) 식이요법</label><br>
+            <label><input type="checkbox" name="content" value=3>3) 스트레스 조절</label><br>
+            <label><input type="checkbox" name="content" value=4>4) 충분한 수면</label><br>
+            <label><input type="checkbox" name="content" value=5>5) 금주</label><br>
 
             <button id="submitBtn" class="submitBtn">다음</button>
         </form>
@@ -37,7 +37,7 @@
                 event.preventDefault();
                
                 let answer4_array = Array.from(document.querySelectorAll('#content input[name="content"]:checked'));
-                let answer4 = answer4_array.map(checkbox => checkbox.value);
+                let answer4 = answer4_array.map(checkbox => parseInt(checkbox.value));
                 // 체크박스의 NodeList를 배열로 변환하여 ABC_temp1에 보관
                 ////let checkboxes = Array.from(document.querySelectorAll('input[name="content"]'));
                 ////let answer3_1 = checkboxes.filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
