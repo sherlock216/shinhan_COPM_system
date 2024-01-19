@@ -45,6 +45,17 @@
     <div class="content">
 
         <div class="survey-section">
+            <h2>0. 청/중/장년층 선택</h2>
+            <label for="age"></label>
+            <input type="radio" id="1" name="age" value="청년층" checked>
+            <label for="1">청년층</label><br>
+            <input type="radio" id="2" name="age" value="중년층">
+            <label for="2">중년층</label><br>
+            <input type="radio" id="3" name="age" value="장년층">
+            <label for="3">장년층</label><br>
+        </div>
+
+        <div class="survey-section">
             <h2>1. 닉네임을 입력해주세요.</h2>
             <label for="nickname"></label>
             <input type="text" id="nicknameid" value="cat"><br>
@@ -85,18 +96,21 @@
         // 제출 버튼에 이벤트 리스너 추가?
         document.getElementById('submitBtn').addEventListener('click', function () {
             event.preventDefault();
+            let age = document.querySelector('input[name="age"]:checked');
             let nickname = document.getElementById('nicknameid').value;
             let birthday = document.getElementById('bdayid').value;
             let sex = document.querySelector('input[name="gender"]:checked');
             let height = parseFloat(document.getElementById('heightid').value);
             let weight = parseFloat(document.getElementById('weightid').value);
 
-            if (!nickname || !birthday || !sex || isNaN(height) || isNaN(weight)) {
+            if (!age || !nickname || !birthday || !sex || isNaN(height) || isNaN(weight)) {
                 alert("모든 필드를 채워주세요.");
                 return;
             }
 
+            age = age.value;
             sex = sex.value;
+            
 
 
             let bmi_rare = weight / Math.pow(height / 100, 2);
@@ -108,6 +122,7 @@
             let ABC={};
             let sector0 = {
                 "nickname" : nickname,
+                "청/중/장년층" : age,
                 "생년 월일": birthday,
                 "성별": sex,
                 "신장": height,

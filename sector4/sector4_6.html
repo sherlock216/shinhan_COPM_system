@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECTOR 4</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/sector_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>SECTOR 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div>
+
+    <div class="content">
+        <form id="content" action="">
+
+            <p>6. 귀하는 평소 알러지를 유발하는 음식이 있나요? <b>(다중선택)</b></p>
+
+            <label><input type="checkbox" name="content" value=1>1) 없음</label><br>
+            <label><input type="checkbox" name="content" value="땅콩">2) 땅콩</label><br>
+            <label><input type="checkbox" name="content" value="유제품">3) 유제품</label><br>
+            <label><input type="checkbox" name="content" value="생선">4) 생선</label><br>
+            <label><input type="checkbox" name="content" value="계란">5) 계란</label><br>
+            <label><input type="checkbox" name="content" value="어패류">6) 어패류</label><br>
+            <label><input type="checkbox" name="content" value="갑각류">7) 갑각류</label><br>
+            <label><input type="checkbox" name="content" value=8>8) 기타</label><br>
+            <br>
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+
+                event.preventDefault();
+               
+                let answer_array = Array.from(document.querySelectorAll('#content input[name="content"]:checked'));
+                let answer = answer_array.map(checkbox => checkbox.value);
+
+                if(answer.length==0){
+                    alert("모든 필드를 채워주세요.");
+                    return;
+                }
+                if(answer.includes('1') && answer.length > 1){
+                    alert("'1) 없음' 선택 시 다른 문항은 선택 불가합니다.");
+                    return;
+                }
+
+                let ABC_temp4 = JSON.parse(sessionStorage.getItem('ABC_temp4'));
+                ABC_temp4[6] = answer;
+                let jsonString = JSON.stringify(ABC_temp4);
+                sessionStorage.setItem('ABC_temp4', jsonString);
+
+                location.href='sector4_7.html'
+            });      
+    </script>
+
+</body>
+</html>  

@@ -7,6 +7,15 @@ body {
     padding: 0;
 }
 
+body p {
+    padding: 1em;
+    line-height: 2;
+}
+
+body h2 {
+    text-align: center;
+}
+
 .header {
     background-color: #1f487c;
     color: white;
@@ -29,6 +38,8 @@ body {
     line-height: 2;
 }
 
+
+
 .content form{
     flex: 1;
 }
@@ -40,7 +51,7 @@ input[type="radio"] {
 
 .content .image img{
     width: auto;
-    max-width: 80%;
+    max-width: 90%;
     height: auto;
 }
 
@@ -76,7 +87,7 @@ input[type="radio"] {
 
 
 /*feedback 구간 및 설명*/
-#textpos {
+#textpos, #textpos2, #alphabet, #explain {
     flex-direction: column;
     display: flex; 
     justify-content: center;
@@ -128,7 +139,7 @@ input[type="radio"] {
     margin-top: 50px;
 }
 .image img {
-    max-width: 80%;
+    max-width: 90%;
     display: block;
     margin-left: auto;
     margin-right: auto;

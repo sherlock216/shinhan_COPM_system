@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECTOR 4</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/sector_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>SECTOR 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div>
+
+    <div class="content">
+        <form id="content" action="">
+
+            <p>1. 귀하가 평소 식사하는 시간대를 <b>모두</b> 고르세요(간식제외, 간단한 식사 포함)</p>
+
+            <label><input type="checkbox" name="content" value=1>1) 아침</label><br>
+            <label><input type="checkbox" name="content" value=2>2) 아점</label><br>
+            <label><input type="checkbox" name="content" value=3>3) 점심</label><br>
+            <label><input type="checkbox" name="content" value=4>4) 점저</label><br>
+            <label><input type="checkbox" name="content" value=5>5) 저녁</label><br>
+            <label><input type="checkbox" name="content" value=6>6) 야식</label><br>
+            <label><input type="checkbox" name="content" value=7>7) 정해진 것 없음</label><br>
+            <br>
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+
+                event.preventDefault();
+               
+                let answer_array = Array.from(document.querySelectorAll('#content input[name="content"]:checked'));
+                let answer = answer_array.map(checkbox => parseInt(checkbox.value));
+
+                if(answer.length==0){
+                    alert("모든 필드를 채워주세요.");
+                    return;
+                }
+                if(answer.includes(7) && answer.length > 1){
+                    alert("'7) 정해진 것 없음' 선택 시 다른 문항은 선택 불가합니다.");
+                    return;
+                }
+
+                let ABC_temp4 = { 1: answer };
+                let jsonString = JSON.stringify(ABC_temp4);
+                sessionStorage.setItem('ABC_temp4', jsonString);
+
+                location.href='sector4_2.html'
+            });      
+    </script>
+
+</body>
+</html>  

@@ -22,7 +22,7 @@
             document.addEventListener('DOMContentLoaded', function () {
                 let temp = JSON.parse(sessionStorage.getItem('ABC_temp3'));
                 let textfile = document.createElement('p');
-                console.log(temp);
+
                 if(temp[3].includes(1) || temp[3].includes(2) || temp[3].includes(3) || temp[3].includes(4)){
                     textfile.textContent = "따로 시간을 내서 신체 활동량을 늘리고자 하면 어려울 수 있으나, 일상 속에서 실천하면 쉽습니다.\n1. 가까운 거리는 걸어서 이동하기\n2. 엘리베이터 사용보다는 계단 사용하기\n3. TV를 볼 때 스트레칭과 같은 간단한 실내 운동하기";
                     if(temp[3].includes(5)){

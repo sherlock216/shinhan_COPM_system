@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECTOR 4</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/sector_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>SECTOR 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div><br><br>
+
+    <div id="textpos">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            let result = JSON.parse(sessionStorage.getItem('ABC_result'));
+            let textfile = document.createElement('p');
+            
+            if(result == 'I'){
+                textfile.textContent = `당신의 COPM 유형 지표 중 식이 지표는 “Imbalanced”에 해당됩니다. 
+                                        간식과 음주를 줄이고 영양소를 고려한 규칙적인 식습관을 가지는 것은 비만 예방에 도움이 됩니다. 한번 변화를 시도해보는 것은 어떠신가요?`;
+            }
+
+            else{
+                textfile.textContent = `당신의 COPM 유형 지표 중 식이 지표는 “Balanced”에 해당됩니다.
+                                        건강한 식이 습관을 잘 유지하고 있군요!`;
+            }
+            
+            document.getElementById('textpos').appendChild(textfile);
+
+        });
+    </script>
+    </div><br><br>
+    
+    <button onclick="location.href='../result.html'"  id="submitBtn" class="submitBtn">다음</button>
+    <br><br>
+</body>
+
+</html>

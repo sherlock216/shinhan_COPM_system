@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECTOR 4</title>
+    <link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+    <link rel="stylesheet" href="../css/sector_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>SECTOR 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div>
+    <br>
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">5-2. 술을 마시는 날은 보통 어느 정도 마십니까?</label><br><br>
+
+            <input type="radio" id="1" name="content" value=1 onclick="showField('소주', '잔')">
+            <label for="1">소주 (잔, 1병 = 7잔)</label><br>
+
+            <input type="radio" id="2" name="content" value=2 onclick="showField('맥주', '캔')">
+            <label for="2">맥주 (500cc 1캔 기준)</label><br>
+
+            <input type="radio" id="3" name="content" value=3 onclick="showField('양주', '잔')">
+            <label for="3">양주 (잔)</label><br>
+
+            <input type="radio" id="4" name="content" value=4 onclick="showField('막걸리', '병')">
+            <label for="4">막걸리 (병)</label><br>
+
+            <input type="radio" id="5" name="content" value=5 onclick="showField('와인', '잔', '을')">
+            <label for="5">와인 (잔)</label><br><br>
+
+            <div id="add"></div>
+
+
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        function showField(drink, cup, pre = "를") {
+            let inputHTML = '<label for="add">' + drink + pre + ' 몇 ' + cup + ' 마시나요?</label><br>' +
+                '<input type="number" id="add" min="1"><br><br>';
+
+            document.getElementById('add').innerHTML = inputHTML;
+        }
+    </script>
+    
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            let answer = document.querySelector('#content input[name="content"]:checked');
+            let quantity = document.getElementById('add').querySelector('input[type="number"]');
+            if (!answer || !quantity) {
+                alert("모든 필드를 채워주세요.");
+                return;
+            }
+            answer = answer.value;
+            quantity = quantity.value;
+            if(quantity === '' || quantity <= 0){
+                alert("1 이상의 값을 입력해주세요.");
+                return;
+            }
+
+            
+            let ABC_temp4 = JSON.parse(sessionStorage.getItem('ABC_temp4'));
+            let ABC_a = JSON.parse(sessionStorage.getItem('ABC_a'));
+            ABC_temp4[52] = {"술종류": parseInt(answer), "양": quantity};
+
+
+            if (ABC_temp4[51] != 3) {
+                if(ABC_temp4[52]["술종류"] == 1 && ABC_temp4[52]["양"] >= 7){
+                    ABC_a[4][5] = 1;
+                }
+                else if(ABC_temp4[52]["술종류"] == 2 && ABC_temp4[52]["양"] >= 3){
+                    ABC_a[4][5] = 1;
+                }
+                else if(ABC_temp4[52]["술종류"] == 3 && ABC_temp4[52]["양"] >= 3){
+                    ABC_a[4][5] = 1;
+                }
+                else if(ABC_temp4[52]["술종류"] == 4 && ABC_temp4[52]["양"] >= 2){
+                    ABC_a[4][5] = 1;
+                }
+                else if(ABC_temp4[52]["술종류"] == 5 && ABC_temp4[52]["양"] >= 7){
+                    ABC_a[4][5] = 1;
+                }
+                
+            }
+            else {
+                ABC_a[4][5] = 1;
+            }
+            
+            sessionStorage.setItem('ABC_a', JSON.stringify(ABC_a));
+            sessionStorage.setItem('ABC_temp4', JSON.stringify(ABC_temp4));
+            location.href = 'sector4_5_feedback.html'
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>

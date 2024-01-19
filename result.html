@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <link rel="icon" type="image/jpg" href="image/favicon.jpg">
+    <link rel="stylesheet" href="css/sector_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>결과 확인하기</h1>
+    </div><br><br>
+
+    <p id="textpos"></p>
+    <br><br>
+
+    <script>
+        let result = JSON.parse(sessionStorage.getItem('ABC_result'));
+        let results = {};
+
+        if (result[1] == 'W') {
+            results[1] = "정확하고('Well')";
+        }
+        else {
+            results[1] = "부정확하고('Poorly')";
+        }
+
+        if (result[2] == 'H') {
+            results[2] = "건강을 잘 유지하고 있으며('Healthy')";
+        }
+        else {
+            results[2] = "건강 관리가 필요하며('Unhealthy')";
+        }
+
+        if (result[3] == 'S') {
+            results[3] = "단독 운동('Single')";
+        }
+        else {
+            results[3] = "협동 운동('Cooperation')";
+        }
+
+        if (result[4] == 'B') {
+            results[4] = "식습관이 올바릅니다('Balanced')";
+        }
+        else {
+            results[4] = "식습관의 교정이 필요합니다('Imbalanced')";
+        }
+
+        document.getElementById("textpos").innerHTML = `당신은 비만에 대한 인식이 ${results[1]}<br><br> ${results[2]}<br><br> ${results[3]}을 선호하고<br><br> ${results[4]}`;
+
+    </script>
+
+
+
+    <div class="image">
+        <img src="image/result2.jpg" alt="결과2그림">
+    </div>
+    <br><br><br><br>
+
+
+
+    <p id="alphabet"></p>
+    <br><br>
+    <p id="explain"></p>
+    <br><br>
+
+    <script>
+        let r = JSON.parse(sessionStorage.getItem('ABC_result'));
+        var sector0 = JSON.parse(sessionStorage.getItem('ABC_sector0'));
+        let alphabet = '';
+        let explain = '';
+
+        //1
+        if (r[1] == 'W' && r[2] == 'U' && r[3] == 'S' && r[4] == 'I') {
+            alphabet = 'WUSI (내면집중형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '필라테스';
+            else if (sector0["청/중/장년층"] === "중년층") age = '자전거';
+            else age = '요가';
+            explain = `당신은 경쟁보다는 혼자만의 시간이 꼭 필요한 유형으로 온전이 내면에 집중할 수 있는 (${age})를 추천합니다.`;
+        }
+        //2
+        else if (r[1] == 'W' && r[2] == 'U' && r[3] == 'C' && r[4] == 'I') {
+            alphabet = 'WUCI (낙천주의자형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '축구';
+            else if (sector0["청/중/장년층"] === "중년층") age = '테니스';
+            else age = '등산';
+            explain = `당신은 사람들과 협동적으로 팀을 이루어 운동하면 시너지 효과를 낼 수 있는 유형으로 추천하는 운동방법은 (${age})입니다.`;
+        }
+        //3
+        else if (r[1] == 'P' && r[2] == 'U' && r[3] == 'C' && r[4] == 'I') {
+            alphabet = 'PUCI (관용주의형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '조깅';
+            else if (sector0["청/중/장년층"] === "중년층") age = '배드민턴';
+            else age = '등산';
+            explain = `당신은 느긋하고 관용적이며 타협을 잘하는 유형으로 (${age})과 같이 야외에서 시간을 보내는 것을 추천합니다.`;
+        }
+        //4
+        else if (r[1] == 'P' && r[2] == 'U' && r[3] == 'S' && r[4] == 'I') {
+            alphabet = 'PUSI (도전가형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '크로스핏';
+            else if (sector0["청/중/장년층"] === "중년층") age = '자전거, 테니스';
+            else age = '수영';
+            explain = `당신은 모험을 즐기고 새로운 도전을 찾는 유형으로 집중력과 기술력이 필요한 (${age})와 같은 운동을 추천합니다.`;
+        }
+        //5
+        else if (r[1] == 'W' && r[2] == 'H' && r[3] == 'S' && r[4] == 'I') {
+            alphabet = 'WHSI (성인군자형)';
+            let age = '';
+            let age2 = '';
+            if (sector0["청/중/장년층"] === "청년층"){
+                age='조깅';
+                age2='필라테스';
+            }
+            else if (sector0["청/중/장년층"] === "중년층"){
+                age='자전거';
+                age2='요가';
+            }
+            else{
+                age='등산';
+                age2='요가';
+            }
+            explain = `당신은 인내심이 강하고 자연과 조용한 환경을 선호하는 유형입니다. 실내 헬스장 대신 (${age})와 같은 야외활동이나 (${age2})와 같은 정신적인 운동을 추천합니다.`;
+        }
+        //6
+        else if (r[1] == 'W' && r[2] == 'H' && r[3] == 'C' && r[4] == 'I') {
+            alphabet = 'WHCI (긍정형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '테니스';
+            else if (sector0["청/중/장년층"] === "중년층") age = '테니스';
+            else age = '등산';
+            explain = `당신은 틀에 박힌 것을 싫어하고 즐거움을 원하는 긍정파 유형으로 (${age})와 같이 몸을 움직일 수 있는 운동을 추천합니다.`;
+        }
+        //7
+        else if (r[1] == 'P' && r[2] == 'H' && r[3] == 'S' && r[4] == 'I') {
+            alphabet = 'PHSI (동기부여형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '필라테스';
+            else if (sector0["청/중/장년층"] === "중년층") age = '헬스, 요가';
+            else age = '요가';
+            explain = `당신은 내적동기와 목표를 중요시 하는 유형으로 (${age}) 등 몸을 움직이는 운동을 추천합니다.`;
+        }
+        //8
+        else if (r[1] == 'P' && r[2] == 'H' && r[3] == 'C' && r[4] == 'I') {
+            alphabet = 'PHCI (협동가형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '축구';
+            else if (sector0["청/중/장년층"] === "중년층") age = '테니스, 배드민턴';
+            else age = '배드민턴';
+            explain = `당신은 비전을 가지고 활력적으로 움직이는 유형으로 협동심이 작용되는 (${age})을 추천합니다.`;
+        }
+        //9
+        else if (r[1] == 'W' && r[2] == 'H' && r[3] == 'S' && r[4] == 'B') {
+            alphabet = 'WHSB (성실온화형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '필라테스, 헬스';
+            else if (sector0["청/중/장년층"] === "중년층") age = '필라테스, 헬스';
+            else age = 'PT';
+            explain = `당신은 건강관리에 성실하게 임하고 인내심이 강한 유형입니다. 완벽주의자인 당신에게 충분한 시간을 갖고 몸의 변화를 찾아가는 (${age}) 운동을 추천합니다.`;
+        }
+        //10
+        else if (r[1] == 'W' && r[2] == 'H' && r[3] == 'C' && r[4] == 'B') {
+            alphabet = 'WHCB (열정가형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '축구';
+            else if (sector0["청/중/장년층"] === "중년층") age = '테니스';
+            else age = '배드민턴';
+            explain = `당신은 건강관리에 관심이 많고 열정적인 유형으로 목표달성을 중요시합니다 . 리더십도 있기 때문에 (${age})을 추첩합니다.`;
+        }
+        //11
+        else if (r[1] == 'P' && r[2] == 'H' && r[3] == 'S' && r[4] == 'B') {
+            alphabet = 'PHSB (근면성실형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '자전거';
+            else if (sector0["청/중/장년층"] === "중년층") age = '헬스';
+            else age = '수영';
+            explain = `당신은 신중하고 책임감이 높으며 자신만의 목표에 집중할 수 있는 유형으로 (${age}) 운동을 추천합니다.`;
+        }
+        //12
+        else if (r[1] == 'P' && r[2] == 'H' && r[3] == 'C' && r[4] == 'B') {
+            alphabet = 'PHCB (사교형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '축구, 테니스';
+            else if (sector0["청/중/장년층"] === "중년층") age = '배드민턴, 테니스';
+            else age = '배드민턴, GX';
+            explain = `당신은 사람들과 함께 운동을 즐기는 유형으로 (${age})와 같은 운동을 추천합니다.`;
+        }
+        //13
+        else if (r[1] == 'W' && r[2] == 'U' && r[3] == 'S' && r[4] == 'B') {
+            alphabet = 'WUSB (용의주도형)';
+            let age = '';
+            let age2 = '';
+            if (sector0["청/중/장년층"] === "청년층"){
+                age='헬스';
+                age2='자전거';
+            }
+            else if (sector0["청/중/장년층"] === "중년층"){
+                age='헬스';
+                age2='자전거';
+            }
+            else{
+                age='PT';
+                age2='등산';
+            }
+            explain = `당신은 목표설정 후 운동하기를 좋아하는 유형으로 (${age}) 와 같은 운동이나 독립적으로 할 수 있는 (${age2})을 추천합니다.`;
+        }
+        //14
+        else if (r[1] == 'W' && r[2] == 'U' && r[3] == 'C' && r[4] == 'B') {
+            alphabet = 'WUCB (친선도모형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '테니스';
+            else if (sector0["청/중/장년층"] === "중년층") age = '배드민턴, 테니스';
+            else age = '등산';
+            explain = `당신은 사람들과 협동적으로 팀을 이루기 좋아하는 유형으로 추천하는 운동은 (${age}) 입니다.`;
+        }
+        //15
+        else if (r[1] == 'P' && r[2] == 'U' && r[3] == 'S' && r[4] == 'B') {
+            alphabet = 'PUSB (성장도모형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '조깅';
+            else if (sector0["청/중/장년층"] === "중년층") age = '조깅';
+            else age = '등산';
+            explain = `당신은 한 곳에 속박되어 있기를 싫어하는 유형으로 (${age}) 과 같이 자유롭게 주변을 구경하면서 혼자만의 시간을 가질 수 있는 운동을 추천합니다.`;
+        }
+        //16
+        else if (r[1] == 'P' && r[2] == 'U' && r[3] == 'C' && r[4] == 'B') {
+            alphabet = 'PUCB (행동가형)';
+            let age = '';
+            if (sector0["청/중/장년층"] === "청년층") age = '등산, 클라이밍';
+            else if (sector0["청/중/장년층"] === "중년층") age = '수영';
+            else age = '등산';
+            explain = `당신은 자신이 좋아하는 것에는 끝까지 하고자 하는 유형으로 (${age})과 같은 운동을 추천합니다.`;
+        }
+
+
+        document.getElementById('alphabet').innerText = alphabet;
+        document.getElementById('explain').innerText = explain;
+
+    </script>
+
+    <div class="image">
+        <img id="imagepos" scr="image/result3-1.jpg" alt="청년층 그림">
+    </div>
+    <br><br>
+
+    <script>
+        if (sector0["청/중/장년층"] == "청년층") {
+            document.getElementById("imagepos").setAttribute('src', 'image/result3-1.jpg');
+            document.getElementById("imagepos").setAttribute('alt', "청년층 그림");
+
+        }
+        else if(sector0["청/중/장년층"] == "중년층"){
+            document.getElementById("imagepos").setAttribute('src', 'image/result3-2.jpg');
+            document.getElementById("imagepos").setAttribute('alt', "중년층 그림");
+        }
+        else{
+            document.getElementById("imagepos").setAttribute('src', 'image/result3-3.jpg');
+            document.getElementById("imagepos").setAttribute('alt', "장년층 그림");
+        }
+    </script>
+
+
+
+    <button onclick="location.href='finish.html'" id="submitBtn" class="submitBtn">다음</button>
+    <br><br>
+</body>
+
+</html>

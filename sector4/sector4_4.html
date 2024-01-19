@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECTOR 4</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/sector_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>SECTOR 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div>
+    <br>
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">4. 귀하는 지난 일주일 간 달콤한 음식을 몇 번 드시나요?<br>(예: 아이스크림, 케이크, 스낵, 탄산음료, 꿀, 엿, 설탕)</label><br><br>
+
+            <input type="radio" id="1" name="content" value=1>
+            <label for="1">1) 먹지 않는다</label><br>
+    
+            <input type="radio" id="2" name="content" value=2>
+            <label for="2">2) 1-2회</label><br>
+
+            <input type="radio" id="3" name="content" value=3>
+            <label for="3">3) 3-4회</label><br>
+
+            <input type="radio" id="4" name="content" value=4>
+            <label for="4">4) 5회 이상</label><br>
+    
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+
+                let answer = document.querySelector('#content input[name="content"]:checked');
+                if(!answer){
+                    alert("모든 필드를 채워주세요.");
+                    return;
+                }
+
+                answer = answer.value;
+
+                let ABC_temp4 = JSON.parse(sessionStorage.getItem('ABC_temp4'));
+                ABC_temp4[4] = parseInt(answer);
+                
+                sessionStorage.setItem('ABC_temp4', JSON.stringify(ABC_temp4));
+
+                location.href='sector4_4_feedback.html'
+            });
+        </script>
+    
+    
+    
+    
+</body>
+</html>

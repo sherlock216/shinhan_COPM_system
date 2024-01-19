@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECTOR 4</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/sector_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>SECTOR 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div>
+    <br>
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">5-1. 지난 한 달간 술을 마시는 횟수는 어느 정도입니까?</label><br><br>
+
+            <input type="radio" id="1" name="content" value=1>
+            <label for="1">1) 한 달에 1~4회</label><br>
+    
+            <input type="radio" id="2" name="content" value=2>
+            <label for="2">2) 한 달에 5~8회</label><br>
+
+            <input type="radio" id="3" name="content" value=3>
+            <label for="3">3) 한 달에 9회 이상</label><br>
+    
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+
+                let answer = document.querySelector('#content input[name="content"]:checked');
+                if(!answer){
+                    alert("모든 필드를 채워주세요.");
+                    return;
+                }
+
+                answer = answer.value;
+
+                let ABC_temp4 = JSON.parse(sessionStorage.getItem('ABC_temp4'));
+                ABC_temp4[51] = parseInt(answer);
+                
+            
+                if(answer == 3){
+                    let ABC_a = JSON.parse(sessionStorage.getItem('ABC_a'));
+                    ABC_a[4][5] = 1;
+                    sessionStorage.setItem('ABC_a', JSON.stringify(ABC_a));
+                }
+                else{
+                    let ABC_a = JSON.parse(sessionStorage.getItem('ABC_a'));
+                    ABC_a[4][5] = 0;
+                    sessionStorage.setItem('ABC_a', JSON.stringify(ABC_a));
+                }
+
+                sessionStorage.setItem('ABC_temp4', JSON.stringify(ABC_temp4));
+                location.href='sector4_5_2.html'
+            });
+        </script>
+    
+    
+    
+    
+</body>
+</html>
