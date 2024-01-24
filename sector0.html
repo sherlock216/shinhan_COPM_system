@@ -33,6 +33,7 @@
             padding: 0;
             vertical-align: middle;
         }
+
     </style>
 
 </head>
@@ -42,7 +43,7 @@
         <h1>SECTOR 0. 기본 정보</h1>
     </div>
 
-    <div class="content">
+    <form action="submit.php" method="POST" class="content">
 
         <div class="survey-section">
             <h2>0. 청/중/장년층 선택</h2>
@@ -86,8 +87,8 @@
             <input type="number" name="weight" placeholder="kg" id="weightid" value=70>
         </div>
 
-        <button id="submitBtn" class="submitBtn">다음</button>
-    </div>
+        <button id="" type="submit" class="submitBtn">다음</button>
+    </form>
 
 
 
@@ -142,7 +143,7 @@
             let stringifiedData = JSON.stringify(sector0);
             let storedData = sessionStorage.setItem('ABC_sector0', stringifiedData);
 
-            location.href = "sector1/sector1_start.html";
+            //location.href = "sector1/sector1_start.html";
 
 /* NODE.js 부분 */
 /*
