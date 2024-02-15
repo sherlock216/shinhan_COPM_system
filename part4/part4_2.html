@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 4</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/part_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div>
+    <br>
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">2. 귀하의 평소 식사 양은 얼마나 되나요?</label><br><br>
+
+            <input type="radio" id="alittle" name="content" value="적게 먹는다">
+            <label for="alittle">적게 먹는다</label><br>
+    
+            <input type="radio" id="proper" name="content" value="적당히 먹는다">
+            <label for="proper">적당히 먹는다</label><br>
+
+            <input type="radio" id="many" name="content" value="과식한다">
+            <label for="many">과식한다</label><br>
+    
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+
+                let answer2 = document.querySelector('#content input[name="content"]:checked');
+                if(!answer2){
+                    alert("질문에 응답해주세요.");
+                    return;
+                }
+
+                answer2 = answer2.value;
+
+                let part4 = JSON.parse(sessionStorage.getItem('part4'));
+                part4[2] = answer2;
+                
+                sessionStorage.setItem('part4', JSON.stringify(part4));
+
+                location.href='part4_2_feedback.html'
+            });
+        </script>
+    
+    
+    
+    
+</body>
+</html>

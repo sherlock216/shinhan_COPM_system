@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PART 4</title>
+    <link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+    <link rel="stylesheet" href="../css/part_content.css">
+
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div>
+
+    <div class="titleh2">
+        <h2>식습관 추천</h2>
+    </div>
+
+    <p>체중 조절을 위한 식생활은 다음과 같습니다.</p>
+    <p><b>1. 짠 음식을 피합니다.</b> <br>짠 음식의 섭취는 몸 안의 수분 배출에 영향을 주어 부종이 쉽게 생기며, 입맛을 돋게 해서 과식을 촉진하고 그로 인해 살이 찌게 만듭니다. 염분을 체내에서 배출을 하고자 한다면 칼륨이 많이 함유되어 있는 식품을 섭취하는 게 좋습니다. 칼륨이 많은 식품으로는 바나나, 감자 등이 있습니다.</p>
+    <p><b>2. 채소는 충분히 먹습니다.</b> <br>채소는 식이섬유가 많아 금방 배를 부르게 하며 포만감도 오래 지속됩니다. 식이섬유는 1일 20-25 g 정도 먹는 것이 좋습니다. 식이섬유 섭취를 증가시키기 위해서는 쌀밥보다는 잡곡류, 도정이 덜 된 곡류를 사용하고, 채소도 즙이나 주스로 먹는 것보다는 생채소로 먹는 것이 좋습니다. 식전 또는 식사 초반에 채소류 등을 먼저 섭취하고, 채소, 해조류(미역, 다시마), 곤약 등의 반찬 등을 충분히 먹습니다.</p>
+    <p><b>3. 음식을 천천히 드세요.</b> <br>과식을 피하기 위하여 천천히 식사를 합니다. 뇌에서 포만감을 느끼는 데는 식후 20분 정도 소요되므로 식사 속도가 빠르면 포만감을 잘 느끼지 못하고 과식하기 쉽습니다. 식사는 가족과 친구와 함께 대화하며 먹습니다. 20분 이상, 천천히 꼭꼭 씹어먹고, 맛을 느끼면서 먹습니다. 식사와 다른 일을 같이 하지 말고, 식탁 등 한 장소에서 먹습니다.</p>
+    <p id="adding"></p>
+    <p id="stressfeedback"></p>
+    <p id="adding2"></p>
+    <br><br>
+
+
+    <script>
+        let part2 = JSON.parse(sessionStorage.getItem('part2'));
+        let part4 = JSON.parse(sessionStorage.getItem('part4'));
+        let result = JSON.parse(sessionStorage.getItem('result'));
+
+        if((!part4[7].includes("아니오")) && part4[7].length >= 1){
+            document.getElementById("adding").innerHTML = "";
+        }
+        else{
+            document.getElementById("adding").innerHTML = "<b>4. 지방 섭취를 알맞게 하세요.</b> <br>체중을 조절할 때 열량이 많은 지질은 양과 종류를 특히 주의해서 먹습니다. 평소에 현명한 식품 선택과 조리 방법을 선택하여 지질을 알맞게 먹도록 합니다.";
+        }
+
+        if(part2[4].includes("항상 우울하다") || part2[4].includes("자주 우울하다") || part2[5].includes("대단히 많이 느낀다") || part2[5].includes("많이 느끼는 편이다")){
+            document.getElementById("stressfeedback").innerHTML = "뇌기능 개선에 도움이 되는 견과류와 항산화 효과가 있는 베리류 그리고 녹색채소류를 한번 먹어보는 것은 어떠신가요? 다음과 같은 음식은 기분 전환에 도움이 된다고 합니다. 채소류(토마토, 아보카도 등), 베리류(블루베리, 크랜베리 등), 견과류(땅콩, 아몬드 등)";
+        }
+
+        let food = [];
+        if(part4[8]){
+            food.push(part4[8]);
+        }
+        part4[6].forEach(element => food.push(element));
+        if(!(food.length == 1 && food[0] == '없음')){
+            food = food.filter((element) => element != '없음');
+            document.getElementById("adding2").innerHTML = `다만, 위 음식들 중 귀하가 섭취하지 못하는 <b>${food}</b>는(은) 제외하고 섭취하세요.`;
+        }
+        sessionStorage.setItem('result', JSON.stringify(result));
+    </script>
+
+
+    <button onclick="location.href='part4_8_feedback_option.html'" id="submitBtn" class="submitBtn">다음</button>
+    <br><br>
+</body>
+
+
+</html>

@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+    font-size: 0.8em;
+    font-family: 'Malgun Gothic', Arial;
+
+
+}
+
+th {
+    background-color: #ead9c0;
+    text-align: center;
+    padding: 1px;
+
+}
+
+td {
+    text-align: center;
+    padding: 8px;
+}

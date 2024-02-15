@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 2</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/part_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 2. 건강</h1>
+        <p>Healthy / Unhealthy</p>
+    </div><br><br>
+
+    <div id="textpos">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let score_rare = JSON.parse(sessionStorage.getItem('score'));
+
+            let result = JSON.parse(sessionStorage.getItem('result'));
+            let textfile = document.createElement('p');
+            
+            let score_result = 0;
+            score_rare = score_rare[2];
+            for(key in score_rare){
+                score_result += score_rare[key];
+            }
+
+            switch(score_result){
+                case 6:
+                    textfile.innerHTML = `당신의 COPM 유형 지표 중 건강 지표는 “Unhealthy”에 해당됩니다.<br> 
+                                        비만과 멀어지고 건강한 삶을 위해 운동 및 식이 변화가 필요합니다.`;
+                    result[2] = 'U';
+                    break;
+                case 5:
+                case 4:
+                    textfile.innerHTML = `당신의 COPM 유형 지표 중 건강 지표는 “Unhealthy”에 해당됩니다.<br>
+                                        비만과 멀어지고 건강한 삶을 위해 운동 및 식이 변화가 필요합니다.`;
+                    result[2] = 'U';
+                    break;
+                case 3:
+                case 2:
+                    textfile.innerHTML = `당신의 COPM 유형 지표 중 건강 지표는 “Healthy”에 해당됩니다.<br>
+                                        비만과 멀어지고 건강한 삶을 유지하기 위해 맞춤형 운동 및 식이를 추천 드립니다.`;
+                    result[2] = 'H';
+                    break;
+                default:
+                    textfile.innerHTML = `당신의 COPM 유형 지표 중 건강 지표는 “Healthy”에 해당됩니다.<br>
+                                        비만과 멀어지고 건강한 삶을 유지하기 위해 맞춤형 운동 및 식이를 추천 드립니다.`;
+                    result[2] = 'H';
+                    break;
+            }
+            document.getElementById('textpos').appendChild(textfile);
+
+            sessionStorage.setItem('result', JSON.stringify(result));
+        });
+    </script>
+    </div><br><br>
+    
+    <button onclick="location.href='../part3/part3_start.html'"  id="submitBtn" class="submitBtn">다음</button>
+    <br><br>
+</body>
+
+</html>

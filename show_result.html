@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신한대학교 COPM System</title>
+    <link rel="icon" type="image/jpg" href="image/favicon.jpg">
+    <link rel="stylesheet" href="/css/show_result.css">
+    <link rel="stylesheet" href="/css/button.css">
+
+</head>
+
+<body>
+    <h2>PART0. 기본정보</h2>
+    <table border="2" bordercolor="black">
+        <tr>
+            <th>회차</th>
+            <th>닉네임</th>
+            <th>청/중/장년층</th>
+            <th>생년 월일</th>
+            <th>성별</th>
+            <th>신장(cm)</th>
+            <th>체중(kg)</th>
+            <th>전화번호</th>
+            <th>BMI</th>
+            <th>허리둘레(cm)</th>
+            <th>인바디: 체지방(%)</th>
+            <th>인바디: 근육량(%)</th>
+        </tr>
+
+        <tr>    
+            <td id="edition"></td>
+            <td id="nickname"></td>
+            <td id="agekorean"></td>
+            <td id="birthday"></td>
+            <td id="sex"></td>
+            <td id="height"></td>
+            <td id="weight"></td>
+            <td id="phone"></td>
+            <td id="BMI"></td>
+            <td><input type="number" id="waistInput"></td>
+            <td><input type="number" id="inbodyFat"></td>
+            <td><input type="number" id="inbodyMuscle"></td>
+        </tr>
+    </table>
+
+    <br><br>
+    <button id="correction" class="button">PART0 수정 저장</button>
+    <button id="back" class="button">뒤로 가기</button>
+
+
+    <br><br>
+    <h2>PART1. 인식</h2>
+    <table border="2" bordercolor="black">
+        <tr>
+            <th>1. 현재 귀하의 체형이 어떻다고 생각하십니까?</th>
+            <th>2. 사진 속 사람이 비만이라고 생각하시나요?</th>
+            <th>3. 비만을 일으킬 수 있는 원인을 모두 고르시오.</th>
+            <th>4. 비만 관리를 위한 방법으로 옳은 것을 모두 고르시오.</th>
+            <th>5. 비만으로 인해 발생할 수 있는 건강 문제인 것을 모두 고르시오.</th>
+        </tr>
+
+        <tr>
+            <td id="q1-1"></td>
+            <td id="q1-2"></td>
+            <td id="q1-3"></td>
+            <td id="q1-4"></td>
+            <td id="q1-5"></td>
+        </tr>
+
+    </table>
+
+
+    <br><br>
+    <h2>PART2. 건강</h2>
+
+
+    <table border="2" bordercolor="black">
+        <tr>
+            <th>1. 다음 중 귀하가 진단받거나 치료중인 질환을 모두 고르시오.</th>
+            <th>2. 현재 통증 혹은 기타 증상이 있는 부위를 모두 고르세요.</th>
+            <th>3. 귀하는 최근 3개월 내 수술한 경험이 있나요? 수술 부위를 모두 고르세요.</th>
+            <th>4. 귀하는 최근 한달 간 우울감을 경험한 적이 있나요? </th>
+            <th>5. 평소 일상생활 중 스트레스를 어느 정도 느끼고 있습니까?</th>
+            <th>6. 귀하는 하루에 보통 몇 시간 주무십니까?</th>
+        </tr>
+
+        <tr>
+            <td id="q2-1"></td>
+            <td id="q2-2"></td>
+            <td id="q2-3"></td>
+            <td id="q2-4"></td>
+            <td id="q2-5"></td>
+            <td id="q2-6"></td>
+        </tr>
+
+    </table>
+
+    <br><br>
+    <h2>PART3. 운동</h2>
+
+
+    <table border="2" bordercolor="black">
+        <tr>
+            <th>1. 귀하가 선호하는 운동 타입은 무엇인가요?</th>
+            <th>2. 최근 6개월 동안 귀하가 하는 운동은 무엇인가요? 운동을 모두 고르세요.</th>
+            <th>3. 귀하가 선호하는 운동을 하지 못하는 이유는 무엇인가요? (다중선택)</th>
+            <th>맞춤형 운동 추천</th>
+        </tr>
+
+        <tr>
+            <td id="q3-1"></td>
+            <td id="q3-2"></td>
+            <td id="q3-3"></td>
+            <td id="q3-4"></td>
+        </tr>
+
+    </table>
+
+
+    <br><br>
+    <h2>PART4. 식이</h2>
+
+
+    <table border="2" bordercolor="black">
+        <tr>
+            <th>1. 귀하가 평소 식사하는 시간대를 모두 고르세요(간식제외, 간단한 식사 포함)</th>
+            <th>2. 귀하의 평소 식사 양은 얼마나 되나요?</th>
+            <th>3. 일주일 중 귀하가 영양소를 고려하여 균형 잡힌 식사를 한 횟수는 얼마인가요?</th>
+            <th>4. 귀하는 지난 일주일 간 달콤한 음식을 몇 번 드시나요? (예: 아이스크림, 케이크, 스낵, 탄산음료, 꿀, 엿, 설탕)</th>
+            <th>5. 귀하는 평소 음주를 하시나요?</th>
+            <th>(5에 '예'를 택한 사람만) 5-1. 지난 한 달간 술을 마시는 횟수는 어느 정도입니까?</th>
+            <th>(5에 '예'를 택한 사람만) 5-2. 술을 마시는 날은 보통 어느 정도 마십니까?</th>
+            <th>6. 귀하는 평소 알러지를 유발하는 음식이 있나요? (다중선택)</th>
+            <th>7. 귀하는 아래에 해당하는 채식을 하고 있나요?</th>
+            <th>8. 귀하는 (알러지 외에) 개인적인 이유로 못 먹는 음식이 있나요?</th>
+        </tr>
+
+        <tr>
+            <td id="q4-1"></td>
+            <td id="q4-2"></td>
+            <td id="q4-3"></td>
+            <td id="q4-4"></td>
+            <td id="q4-5"></td>
+            <td id="q4-51"></td>
+            <td id="q4-52"></td>
+            <td id="q4-6"></td>
+            <td id="q4-7"></td>
+            <td id="q4-8"></td>
+        </tr>
+
+    </table>
+
+
+    <br><br>
+    <h2>결과</h2>
+
+
+    <table border="2" bordercolor="black">
+        <tr>
+            <th>PART 1: 인식(Well / Poorly)</th>
+            <th>PART 2: 건강(Healthy / Unhealthy)</th>
+            <th>PART 3: 운동(Single / Cooperation)</th>
+            <th>PART 4: 식이(Balanced / Imbalanced)</th>
+        </tr>
+
+        <tr>
+            <td id="r1"></td>
+            <td id="r2"></td>
+            <td id="r3"></td>
+            <td id="r4"></td>
+        </tr>
+
+    </table>
+
+
+
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Session Storage에서 데이터 가져오기
+            let finaldata = JSON.parse(sessionStorage.getItem('part0'));
+            if (finaldata) {
+                document.getElementById('edition').innerHTML = sessionStorage.getItem('edition');
+                document.getElementById('nickname').innerHTML = finaldata["nickname"];
+                document.getElementById('agekorean').innerHTML = finaldata["청/중/장년층"];
+                document.getElementById('birthday').innerHTML = finaldata["생년 월일"];
+                document.getElementById('sex').innerHTML = finaldata["성별"];
+                document.getElementById('height').innerHTML = finaldata["신장"];
+                document.getElementById('weight').innerHTML = finaldata["체중"];
+                document.getElementById('phone').innerHTML = finaldata["전화번호"];
+                document.getElementById('BMI').innerHTML = finaldata["BMI_RARE"];
+
+                let waistInput = document.getElementById('waistInput');
+                waistInput.value = finaldata["허리둘레"];
+                let inbodyFat = document.getElementById('inbodyFat');
+                inbodyFat.value = finaldata["인바디: 체지방"];
+                let inbodyMuscle = document.getElementById('inbodyMuscle');
+                inbodyMuscle.value = finaldata["인바디: 근육량"];
+
+
+                document.getElementById('correction').addEventListener('click', function () {
+                    // 값 수정
+                    finaldata["허리둘레"] = parseFloat(waistInput.value);
+                    finaldata["인바디: 체지방"] = parseFloat(inbodyFat.value);
+                    finaldata["인바디: 근육량"] = parseFloat(inbodyMuscle.value);
+
+                    let data = {};
+
+                    let part0 = finaldata;
+                    data["part0"] = part0;
+
+                    let user_key = JSON.parse(sessionStorage.getItem('user_key'));
+                    data['user_key'] = user_key;
+
+                    alert("저장되었습니다.");
+
+                    fetch('revise.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok. ');
+                            }
+                            return response.text();
+                        })
+                        .then(text => {
+                            alert(text);
+                        })
+                        .catch(error => alert('Error:' + error));
+
+                    //기존 세션스토리지 지우고 새로
+                    sessionStorage.removeItem("part0");
+                    sessionStorage.setItem("part0", JSON.stringify(data["part0"]));
+                })
+            }
+
+            let finaldata1 = JSON.parse(sessionStorage.getItem('part1'));
+            document.getElementById('q1-1').innerHTML = finaldata1['1'];
+            document.getElementById('q1-2').innerHTML = finaldata1['2'];
+            document.getElementById('q1-3').innerHTML = finaldata1['3'];
+            document.getElementById('q1-4').innerHTML = finaldata1['4'];
+            document.getElementById('q1-5').innerHTML = finaldata1['5'];
+
+            let finaldata2 = JSON.parse(sessionStorage.getItem('part2'));
+            document.getElementById('q2-1').innerHTML = finaldata2['1'];
+            document.getElementById('q2-2').innerHTML = finaldata2['2'];
+            document.getElementById('q2-3').innerHTML = finaldata2['3'];
+            document.getElementById('q2-4').innerHTML = finaldata2['4'];
+            document.getElementById('q2-5').innerHTML = finaldata2['5'];
+            document.getElementById('q2-6').innerHTML = finaldata2['6'];
+
+            let finaldata3 = JSON.parse(sessionStorage.getItem('part3'));
+
+            let finalscore = JSON.parse(sessionStorage.getItem('score'));
+
+            document.getElementById('q3-1').innerHTML = finaldata3['1'];
+            document.getElementById('q3-2').innerHTML = finaldata3['2'];
+            document.getElementById('q3-3').innerHTML = finaldata3['3'];
+            document.getElementById('q3-4').innerHTML = finalscore['3']["운동"];
+
+            let finaldata4 = JSON.parse(sessionStorage.getItem('part4'));
+            document.getElementById('q4-1').innerHTML = finaldata4['1'];
+            document.getElementById('q4-2').innerHTML = finaldata4['2'];
+            document.getElementById('q4-3').innerHTML = finaldata4['3'];
+            document.getElementById('q4-4').innerHTML = finaldata4['4'];
+            document.getElementById('q4-5').innerHTML = finaldata4['5'];
+            document.getElementById('q4-51').innerHTML = (finaldata4['51'] || '');
+            document.getElementById('q4-52').innerHTML = (finaldata4['52']['술종류'] || '') + ' ' + (finaldata4['52']['양'] || '');
+            document.getElementById('q4-6').innerHTML = finaldata4['6'];
+            document.getElementById('q4-7').innerHTML = finaldata4['7'];
+            document.getElementById('q4-8').innerHTML = finaldata4['8'];
+
+
+            let finalresult = JSON.parse(sessionStorage.getItem('result'));
+
+            document.getElementById('r1').innerHTML = finalresult['1'];
+            document.getElementById('r2').innerHTML = finalresult['2'];
+            document.getElementById('r3').innerHTML = finalresult['3'];
+            document.getElementById('r4').innerHTML = finalresult['4'];
+
+
+
+        });
+
+    //이전 버튼(필요없음)
+    document.getElementById('back').addEventListener('click', function () {
+        sessionStorage.clear();
+        window.location.href = 'show_all_result.php';
+    });
+    
+
+
+    </script>
+
+
+</body>
+
+</html>

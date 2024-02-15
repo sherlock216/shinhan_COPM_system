@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PART 0</title>
+    <link rel="icon" type="image/jpg" href="image/favicon.jpg">
+    <link rel="stylesheet" href="css/part_content.css">
+
+    <style>
+        /* survery-section class는 part0에만 있는 class */
+        .survey-section {
+            background: #1f487c;
+            color: white;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .survey-section h2 {
+            margin: 0 0 10px 0;
+        }
+
+        .survey-section input {
+            width: 90%;
+            padding: 5px;
+            margin-top: 20px;
+        }
+
+        .survey-section input[type="radio"] {
+            width: auto;
+            margin-top: 0;
+            padding: 0;
+            vertical-align: middle;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 0. 기본 정보</h1>
+    </div>
+    
+    <!--<form action="submit.php" method="POST" class="content" id="survey">-->
+    <form class="content">
+
+        <!--<div class="survey-section">
+            <h2>0. 청/중/장년층 선택</h2>
+            <h5>청년층: 34세 이하, 중년층: 35-49세, 장년층: 50세 이상</h5>
+            <label for="age"></label>
+            <input type="radio" id="1" name="age" value="청년층" checked>
+            <label for="1">청년층</label><br>
+            <input type="radio" id="2" name="age" value="중년층">
+            <label for="2">중년층</label><br>
+            <input type="radio" id="3" name="age" value="장년층">
+            <label for="3">장년층</label><br>
+        </div>-->
+
+        <div class="survey-section">
+            <h2>1. 이름을 입력해주세요. (예: 홍길동)</h2>
+            <label for="nickname"></label>
+            <input type="text" id="nicknameid"><br>
+        </div>
+
+        <div class="survey-section">
+            <h2>2. 귀하의 생년 월일은?</h2>
+            <h5>청년층: 34세 이하, 중년층: 35-49세, 장년층: 50세 이상</h5>
+            <label for="bday"></label>
+            <input type="date" id="bdayid"><br>
+        </div>
+
+        <div class="survey-section">
+            <h2>3. 귀하의 성별은?</h2>
+            <label for="gender"></label>
+            <input type="radio" id="male" name="gender" value="남자">
+            <label for="male">남자</label><br>
+            <input type="radio" id="female" name="gender" value="여자">
+            <label for="female">여자</label><br>
+        </div>
+
+        <div class="survey-section">
+            <h2>4. 귀하의 신장은?</h2>
+            <input type="number" name="height" placeholder="cm" id="heightid">
+        </div>
+
+        <div class="survey-section">
+            <h2>5. 귀하의 체중은?</h2>
+            <input type="number" name="weight" placeholder="kg" id="weightid">
+        </div>
+
+        <div class="survey-section">
+            <h2>6. 연락처를 입력해 주세요.</h2>
+            <input type="text" placeholder="010-0000-0000" id="phoneid">
+        </div>
+
+        <button type="submit" id="test" class="submitBtn">다음</button>
+    </form>
+
+
+
+    <script>
+
+        // 제출 버튼에 이벤트 리스너 추가?
+        document.getElementById('test').addEventListener('click', function () {
+            event.preventDefault();
+            //let age = document.querySelector('input[name="age"]:checked');
+            let nickname = document.getElementById('nicknameid').value;
+            let birthday = document.getElementById('bdayid').value;
+            let sex = document.querySelector('input[name="gender"]:checked');
+            let height = parseFloat(document.getElementById('heightid').value);
+            let weight = parseFloat(document.getElementById('weightid').value);
+            let phone = document.getElementById('phoneid').value;
+
+            if (!nickname || !birthday || !sex || isNaN(height) || isNaN(weight) || !phone) {
+                alert("진행 전 모든 정보를 기입해 주세요.");
+                return;
+            }
+
+            //age = age.value;
+            sex = sex.value;
+            
+
+
+            let bmi_rare = weight / Math.pow(height / 100, 2);
+            let bmi = 0;
+            if (bmi_rare >= 30) bmi = 1;
+            else if (bmi_rare >= 23 && bmi_rare < 30) bmi = 2;
+            else if (bmi_rare >= 18.5 && bmi_rare < 23) bmi = 3;
+            else bmi = 4;
+
+            //청/중/장년층 판단하기
+            let today = new Date();
+            let birthDate = new Date(birthday);
+            let age_temp = today.getFullYear() - birthDate.getFullYear();
+            let month = today.getMonth() - birthDate.getMonth();
+            if(month < 0 || (month === 0 && today.getDate() < birthDate.getDate())){
+                age_temp--;
+            }
+
+            if(age_temp <= 34) {
+                age = "청년층";
+            }
+            else if(age_temp >= 50){
+                age = "장년층";
+            }
+            else{
+                age = "중년층";
+            }
+
+            let part0 = {
+                "nickname" : nickname,
+                "청/중/장년층" : age,
+                "생년 월일": birthday,
+                "성별": sex,
+                "신장": height,
+                "체중": weight,
+                "전화번호": phone,
+                "허리둘레": 0,
+                "인바디: 체지방": 0,
+                "인바디: 근육량": 0,
+                "BMI": bmi,
+                "BMI_RARE": bmi_rare
+            };
+            sessionStorage.setItem('part0', JSON.stringify(part0));
+            location.href = "part1/part1_ment.html";
+            /*fetch('submit.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(part0),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data);
+                //stringify, setItem
+                sessionStorage.setItem('ABC_part0', JSON.stringify(part0));
+
+                location.href = "part1/part1_start.html";
+            })*/
+
+        });
+    </script>
+
+
+
+</body>
+
+</html>

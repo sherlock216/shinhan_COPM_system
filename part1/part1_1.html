@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PART 1</title>
+    <link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+    <link rel="stylesheet" href="../css/part_content.css">
+
+</head>
+
+
+<body>
+
+    <div class="header">
+        <h1>PART 1. 인식</h1>
+        <p>Well / Poorly recognized</p>
+    </div>
+
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">1. 현재 귀하의 체형이 어떻다고 생각하십니까?</label><br><br>
+
+            <input type="radio" id="veryfat" name="content" value="매우 비만">
+            <label for="veryfat">매우 비만</label><br>
+
+            <input type="radio" id="fat" name="content" value="약간 비만">
+            <label for="fat">약간 비만</label><br>
+
+            <input type="radio" id="normal" name="content" value="보통">
+            <label for="normal">보통</label><br>
+
+            <input type="radio" id="slim" name="content" value="약간 마름">
+            <label for="slim">약간 마름</label><br>
+
+            <input type="radio" id="veryslim" name="content" value="매우 마름">
+            <label for="veryslim">매우 마름</label><br>
+
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+
+    <script>
+
+        document.getElementById('submitBtn').addEventListener('click', function () {
+            event.preventDefault();
+
+            //parse in part0
+            let storedData0 = sessionStorage.getItem('part0');
+
+            let parsedObj0 = JSON.parse(storedData0);
+
+            //값 없이 이 페이지로 바로 들어온 경우(1-1문항만 테스트 해 보았음. 다른 문항에도 적용해야함.)
+            if (!parsedObj0) {
+                alert('신체 정보가 없습니다. part 0 설문부터 진행해주세요.');
+                location.href = "../part0.html";
+            }
+
+
+            //ABC_temp1에 1-1번의 사용자 응답 저장
+            let answer1 = document.querySelector('#content input[name="content"]:checked');
+            if (!answer1) {
+                alert("질문에 응답해주세요.");
+                return;
+            }
+
+            answer1 = answer1.value;
+
+            let temp1 = { 1: answer1 };
+            let score = { 1: {}, 2: {}, 3: {}, 4: {} };
+            let result = {};
+
+            sessionStorage.setItem('part1', JSON.stringify(temp1));
+
+            //parse
+            let parsedObj = JSON.parse(sessionStorage.getItem('part1'));
+            let code = 0;
+            switch(parsedObj[1]){
+                case "매우 비만":
+                    code = 1;
+                    break;
+                case "약간 비만":
+                    code = 2;
+                    break;
+                case "보통":
+                    code = 3;
+                    break;
+                case "약간 마름":
+                    code = 4;
+                    break;
+                default:
+                    code = 5;
+            }
+
+
+
+
+            //part0의 BMI 데이터와 part1-1 사용자 대답의 비교 통해 1-1 정답 도출
+            if (parsedObj0["BMI"] == 4) {
+                if (code == 4 || code == 5) {
+                    score[1][1] = 0; //정답
+                }
+                else {
+                    score[1][1] = parsedObj0["BMI"] - code;
+                }
+            }
+            else {
+                if (parsedObj0["BMI"] - code == 0) {
+                    score[1][1] = 0; //정답
+                }
+                else {
+                    score[1][1] = parsedObj0["BMI"] - code;
+                }
+            }
+
+
+            sessionStorage.setItem('score', JSON.stringify(score));
+            sessionStorage.setItem('result', JSON.stringify(result));
+
+            location.href = "part1_2.html";
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PART 2</title>
+    <link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+    <link rel="stylesheet" href="../css/part_content.css">
+    <style>
+        .content form {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .image {
+            margin-left: auto;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 2. 건강</h1>
+        <p>Healthy / Unhealthy</p>
+    </div>
+
+    <p>2. 현재 통증 혹은 기타 증상이 있는 부위를 모두 고르세요.</p><br><br>
+
+    <div class="content">
+        <form id="content" action="">
+
+            <div>
+                <label><input type="checkbox" name="content" value="목">목</label><br>
+                <label><input type="checkbox" name="content" value="어깨">어깨</label><br>
+                <label><input type="checkbox" name="content" value="허리/고관절">허리/고관절</label><br>
+                <label><input type="checkbox" name="content" value="팔꿈치">팔꿈치</label><br>
+                <label><input type="checkbox" name="content" value="손목">손목</label><br>
+                <label><input type="checkbox" name="content" value="무릎">무릎</label><br>
+                <label><input type="checkbox" name="content" value="발목">발목</label><br>
+                <label><input type="checkbox" name="content" value="없음">없음</label><br>
+            </div>
+
+            <div class="image">
+                <img src="../image/2-23.jpg" alt="2-23그림" width="200" height="300">
+            </div>
+
+        </form>
+    </div>
+
+    <button id="submitBtn" class="submitBtn">다음</button>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function (event) {
+
+            event.preventDefault();
+
+            let answer2_array = Array.from(document.querySelectorAll('#content input[name="content"]:checked'));
+            let answer2 = answer2_array.map(checkbox => checkbox.value);
+
+            if (answer2.length == 0) {
+                alert("질문에 응답해주세요.");
+                return;
+            }
+            if (answer2.includes('없음') && answer2.length > 1) {
+                alert("'없음' 선택 시 다른 문항은 선택 불가합니다.");
+                return;
+            }
+
+
+            let part2 = JSON.parse(sessionStorage.getItem('part2'));
+            part2[2] = answer2;
+            let jsonString = JSON.stringify(part2);
+            sessionStorage.setItem('part2', jsonString);
+
+            //parse in ABC_a
+            let score = JSON.parse(sessionStorage.getItem('score'));
+
+
+            if (answer2.length == 0) {
+                score[2][2] = 0;
+            }
+            else {
+                score[2][2] = 1;
+            }
+
+            sessionStorage.setItem('score', JSON.stringify(score));
+
+            location.href = 'part2_3.html'
+        });      
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 4</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/part_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div>
+
+    <div class="content">
+        <form id="content" action="">
+
+            <p>1. 귀하가 평소 식사하는 시간대를 <b>모두</b> 고르세요(간식제외, 간단한 식사 포함)</p>
+
+            <label><input type="checkbox" name="content" value="아침">아침</label><br>
+            <label><input type="checkbox" name="content" value="아점">아점</label><br>
+            <label><input type="checkbox" name="content" value="점심">점심</label><br>
+            <label><input type="checkbox" name="content" value="점저">점저</label><br>
+            <label><input type="checkbox" name="content" value="저녁">저녁</label><br>
+            <label><input type="checkbox" name="content" value="야식">야식</label><br>
+            <label><input type="checkbox" name="content" value="정해진 것 없음">정해진 것 없음</label><br>
+            <br>
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+
+                event.preventDefault();
+               
+                let answer_array = Array.from(document.querySelectorAll('#content input[name="content"]:checked'));
+                let answer1 = answer_array.map(checkbox => checkbox.value);
+
+                if(answer1.length==0){
+                    alert("질문에 응답해주세요.");
+                    return;
+                }
+                if(answer1.includes("정해진 것 없음") && answer1.length > 1){
+                    alert("'정해진 것 없음' 선택 시 다른 문항은 선택 불가합니다.");
+                    return;
+                }
+
+                let part4 = { 1: answer1 };
+                let jsonString = JSON.stringify(part4);
+                sessionStorage.setItem('part4', jsonString);
+
+                location.href='part4_2.html'
+            });      
+    </script>
+
+</body>
+</html>  

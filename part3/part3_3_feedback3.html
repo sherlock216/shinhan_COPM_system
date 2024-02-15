@@ -1,0 +1,233 @@
+<!--식이도 세션스토리지에 저장? 만들면서 고려되지 않았음-->
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PART 3</title>
+    <link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+    <link rel="stylesheet" href="../css/part_content.css">
+
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 3. 운동</h1>
+        <p>Single / Cooperation</p>
+    </div><br><br>
+
+
+    <div id="textpos">
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                let temp = JSON.parse(sessionStorage.getItem('result'));
+                let part0 = JSON.parse(sessionStorage.getItem('part0'));
+                let part2 = JSON.parse(sessionStorage.getItem('part2'));
+                let part3 = JSON.parse(sessionStorage.getItem('part3'));
+                let score = JSON.parse(sessionStorage.getItem('score'));
+                let textfile1 = document.createElement('p');
+                let textfile2 = document.createElement('p');
+                let textfile25 = document.createElement('p');
+                let textfile3 = document.createElement('p');
+                let textfile4 = document.createElement('p');
+
+                let arr_s_young = ['필라테스', '헬스', '요가', '수영', '클라이밍', '조깅', '등산', '스쿼시', '자전거', '걷기', '스케이트', 'PT', 'GX', '홈트'];
+                let arr_c_young = ['축구', '크로스핏 또는 F45', '헬스', '테니스', '풋살', '댄스', '무술(태권도, 주짓수)', '클라이밍', '요가', '자전거', '수영', '스케이트', '조깅', 'GX', '배드민턴'];
+                let arr_s_mid = ['헬스', '요가', '자전거', '필라테스', '홈트', '수영', '클라이밍', '조깅', '등산', '스쿼시', '걷기', '스케이트', 'PT', 'GX'];
+                let arr_c_mid = ['배드민턴', '테니스', '헬스', '요가', '자전거', '축구', '풋살', '댄스', '무술(태권도, 주짓수)', '클라이밍', '크로스핏 또는 F45', '필라테스', '수영', '걷기', '스케이트', '조깅', 'GX', '등산', '스쿼시'];
+                let arr_s_old = ['요가', '수영', 'PT', '등산', '필라테스', '홈트', '헬스', '클라이밍', '조깅', '스쿼시', '자전거', '걷기', 'GX'];
+                let arr_c_old = ['수영', '요가', '걷기', '등산', '축구', '배드민턴', '풋살', '테니스', '댄스', '헬스', '필라테스', '자전거', '조깅', 'GX', '스쿼시'];
+
+                let arr_result = [];
+                let flag = 0;
+                let injury = [];
+                textfile1.textContent = "";
+                textfile2.textContent = "";
+                textfile25.textContent = "";
+
+                // S인지 C인지에 따라 운동들이 선택됨
+                if (temp[3] == 'S') {
+                    if (part0["청/중/장년층"] == "청년층") {
+                        arr_result = arr_result.concat(arr_s_young);
+                    }
+                    else if (part0["청/중/장년층"] == "중년층") {
+                        arr_result = arr_result.concat(arr_s_mid);
+                    }
+                    else {
+                        arr_result = arr_result.concat(arr_s_old);
+                    }
+                }
+
+                else {
+                    if (part0["청/중/장년층"] == "청년층") {
+                        arr_result = arr_result.concat(arr_c_young);
+                    }
+                    else if (part0["청/중/장년층"] == "중년층") {
+                        arr_result = arr_result.concat(arr_c_mid);
+                    }
+                    else {
+                        arr_result = arr_result.concat(arr_c_old);
+                    }
+                }
+
+
+
+
+                //본인이 선호하는 운동이면 순서 상 앞으로 위치(이미 있는 경우 지우고 순서상 앞으로 위치)
+                if (!(part3[2].includes("없음"))) {
+                    part3[2].forEach(element => {
+                        let index = arr_result.indexOf(element);
+                        if (index != -1) {
+                            arr_result.splice(index, 1);
+                        }
+                        arr_result.unshift(element);
+                    });
+                }
+
+
+                // part2-2, 3 통증, 수술 응답에 따라 제외되고 추가됨
+                if (part2[2].includes("목") || part2[3].includes("목")) {
+                    injury.push(1);
+                    textfile1.textContent = textfile1.textContent.concat("운동을 하는 도중 목에 통증이 느껴진다면 운동을 중단해야 합니다. ");
+                    textfile2.textContent = textfile2.textContent.concat("보다 약한 강도의 운동을 하는 것을 추천합니다. ");
+                }
+
+                if (part2[2].includes("어깨") || part2[3].includes("어깨")) {
+                    injury.push(2);
+                    let removeItems = ['수영', '클라이밍', '배드민턴', '테니스', '스쿼시'];
+                    arr_result = arr_result.filter(item => !removeItems.includes(item));
+                    textfile1.textContent = textfile1.textContent.concat("어깨에 무리가 가는 운동은 되도록 피하세요. ");
+                    if (!flag) {
+                        textfile2.textContent = textfile2.textContent.concat("하체 운동 위주로 하는 것을 추천합니다. ");
+                        arr_result.unshift('하체 헬스 운동(레그프레스, 런지, 스쿼트, 스탭업 등)');
+                        flag = 1;
+                    }
+                }
+
+                if (part2[2].includes("허리/고관절") || part2[3].includes("허리/고관절")) {
+                    injury.push(3);
+                    let removeItems = ['요가', '배드민턴', '테니스', '스쿼시', '무술(태권도, 주짓수)', '조깅', '등산'];
+                    arr_result = arr_result.filter(item => !removeItems.includes(item));
+                    textfile1.textContent = textfile1.textContent.concat("허리나 고관절에 무리가 가는 운동은 되도록 피하세요. ");
+                }
+
+                if (part2[2].includes("팔꿈치") || part2[3].includes("팔꿈치")) {
+                    injury.push(4);
+                    let removeItems = ['배드민턴', '테니스', '스쿼시'];
+                    arr_result = arr_result.filter(item => !removeItems.includes(item));
+                    textfile1.textContent = textfile1.textContent.concat("팔꿈치에 무리가 가는 운동은 되도록 피하세요. ");
+                    if (!flag) {
+                        textfile2.textContent = textfile2.textContent.concat("하체 운동 위주로 하는 것을 추천합니다. ");
+                        arr_result.unshift('하체 헬스 운동(레그프레스, 런지, 스쿼트, 스탭업 등)');
+                        flag = 1;
+                    }
+                }
+
+                if (part2[2].includes("손목") || part2[3].includes("손목")) {
+                    injury.push(5);
+                    let removeItems = ['배드민턴', '테니스', '스쿼시'];
+                    arr_result = arr_result.filter(item => !removeItems.includes(item));
+                    textfile1.textContent = textfile1.textContent.concat("손목에 무리가 가는 운동은 되도록 피하세요. ");
+                    if (!flag) {
+                        textfile2.textContent = textfile2.textContent.concat("하체 운동 위주로 하는 것을 추천합니다. ");
+                        arr_result.unshift('하체 헬스 운동(레그프레스, 런지, 스쿼트, 스탭업 등)');
+                        flag = 1;
+                    }
+                }
+
+                if (part2[2].includes("무릎") || part2[3].includes("무릎")) {
+                    injury.push(6);
+                    let removeItems = ['수영', '홈트', '조깅', '축구', '풋살', '크로스핏 또는 F45'];
+                    arr_result = arr_result.filter(item => !removeItems.includes(item));
+                    textfile1.textContent = textfile1.textContent.concat("무릎에 무리가 가는 운동은 되도록 피하세요. ");
+                }
+
+                if (part2[2].includes("발목") || part2[3].includes("발목")) {
+                    injury.push(7);
+                    let removeItems = ['축구', '홈트', '자전거', '배드민턴', '스쿼시', '테니스', '풋살', '스케이트', '무술(태권도, 주짓수 등)', '댄스'];
+                    arr_result = arr_result.filter(item => !removeItems.includes(item));
+                    textfile1.textContent = textfile1.textContent.concat("발목에 무리가 가는 운동은 되도록 피하세요. ");
+                    textfile2.textContent = textfile2.textContent.concat("상체 운동 위주로 하는 것을 추천합니다. ");
+                    arr_result.unshift('상체 헬스 운동(벤치프레스, 체스트프레스, 숄더프레스, 랫풀다운, 체스트플라이 등)');
+                }
+
+
+                //2-4, 2-5 질문 고려
+                if (score[2][4] == 1) {
+                    textfile25.textContent = textfile25.textContent.concat("야외 활동은 기분전환에 도움이 될 수 있어요! ");
+                    if (!arr_result.includes('등산')) {
+                        arr_result.unshift('등산');
+                    }
+
+                    if (!arr_result.includes('야외 산책')) {
+                        arr_result.unshift('야외 산책');
+                    }
+
+                    if (!injury.includes(7) && !arr_result.includes('자전거')) {
+                        arr_result.unshift('자전거');
+                    }
+
+                }
+
+                if (score[2][5] == 1) {
+                    textfile25.textContent = textfile25.textContent.concat("활동적인 운동을 통해 스트레스를 날려보아요! ");
+                    /*if(!textfile5){
+                        textfile5.textContent = textfile5.textContent.concat("뇌기능 개선에 도움이 되는 견과류와 항산화 효과가 있는 베리류 그리고 녹색채소류를 한번 먹어보는 것은 어떠신가요? 다음과 같은 음식은 기분 전환에 도움이 된다고 합니다. 채소류(토마토, 아보카도 등), 베리류(블루베리, 크랜베리 등), 견과류(땅콩, 아몬드 등)");
+                    }*/
+
+                    if (!arr_result.includes('복싱')) {
+                        arr_result.unshift('복싱');
+                    }
+
+                    if ([2, 3, 4, 5, 7].every(num => !injury.includes(num)) && !arr_result.includes('테니스')) {
+                        arr_result.unshift('테니스');
+                    }
+
+                    if ([2, 3, 4, 5, 7].every(num => !injury.includes(num)) && !arr_result.includes('배드민턴')) {
+                        arr_result.unshift('배드민턴');
+                    }
+
+                    if (!arr_result.includes('야구')) {
+                        arr_result.unshift('야구');
+                    }
+
+                    if ([6, 7].every(num => !injury.includes(num)) && !arr_result.includes('축구')) {
+                        arr_result.unshift('축구');
+                    }
+
+                    if ([3, 6].every(num => !injury.includes(num)) && !arr_result.includes('조깅')) {
+                        arr_result.unshift('조깅');
+                    }
+
+                }
+
+                document.getElementById('textpos').appendChild(textfile1);
+                document.getElementById('textpos').appendChild(textfile2);
+                if (textfile25) {
+                    document.getElementById('textpos').appendChild(textfile25);
+                }
+
+                textfile3.textContent = "다음과 같은 운동을 해보는 것은 어떠신가요? ";
+                document.getElementById('textpos').appendChild(textfile3);
+
+                textfile4.textContent = arr_result.join(' / ');
+                document.getElementById('textpos').appendChild(textfile4);
+
+                score[3]['운동'] = arr_result;
+                sessionStorage.setItem('score', JSON.stringify(score));
+            });
+
+
+        </script>
+    </div><br><br>
+
+
+
+    <button onclick="location.href='../part4/part4_start.html'" id="submitBtn" class="submitBtn">다음</button>
+    <br><br>
+</body>
+
+
+</html>

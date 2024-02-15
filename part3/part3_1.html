@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 3</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/part_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 3. 운동</h1>
+        <p>Single / Cooperation</p>
+    </div>
+    <br><br><br>
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">1. 귀하가 선호하는 운동 타입은 무엇인가요?</label><br><br>
+
+            <input type="radio" id="self" name="content" value="혼자 하는 운동">
+            <label for="self">혼자 하는 운동</label><br>
+    
+            <input type="radio" id="many" name="content" value="같이 하는 운동 (예: 팀운동)">
+            <label for="many">같이 하는 운동 (예: 팀운동)</label><br>
+    
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+
+                let answer1 = document.querySelector('#content input[name="content"]:checked');
+                if(!answer1){
+                    alert("질문에 응답해주세요.");
+                    return;
+                }
+
+                answer1 = answer1.value;
+
+                let part3 = { 1: answer1 };
+                sessionStorage.setItem('part3', JSON.stringify(part3));
+
+                //parse in answer
+                let score = JSON.parse(sessionStorage.getItem('score'));
+                let result = JSON.parse(sessionStorage.getItem('result'));
+    
+                if(answer1 == "혼자 하는 운동") {
+                    score[3][1] = 1;
+                    result[3] = 'S';
+                }
+                else{
+                    score[3][1] = 0;
+                    result[3] = 'C';
+                }
+    
+                sessionStorage.setItem('score', JSON.stringify(score));
+                sessionStorage.setItem('result', JSON.stringify(result));
+
+                location.href='part3_2.html'
+            });
+        </script>
+    
+    
+    
+    
+</body>
+</html>

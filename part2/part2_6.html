@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 2</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/part_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 2. 건강</h1>
+        <p>Healthy / Unhealthy</p>
+    </div>
+    <br><br><br>
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">6. 귀하는 하루에 보통 몇 시간 주무십니까?</label><br><br>
+
+            <input type="radio" id="5" name="content" value="5시간 미만">
+            <label for="5">5시간 미만</label><br>
+    
+            <input type="radio" id="6" name="content" value="5시간 이상 -6시간 미만">
+            <label for="6">5시간 이상 -6시간 미만</label><br>
+    
+            <input type="radio" id="7" name="content" value="6시간 이상 -7시간 미만">
+            <label for="7">6시간 이상 -7시간 미만</label><br>
+    
+            <input type="radio" id="8" name="content" value="7시간 이상 -9시간 미만">
+            <label for="8">7시간 이상 -9시간 미만</label><br>
+    
+            <input type="radio" id="9" name="content" value="9시간 이상">
+            <label for="9">9시간 이상</label><br>
+        
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+
+                let answer6 = document.querySelector('#content input[name="content"]:checked');
+                if(!answer6){
+                    alert("질문에 응답해주세요.");
+                    return;
+                }
+
+                answer6 = answer6.value;
+
+                let part2 = JSON.parse(sessionStorage.getItem('part2'));
+                part2[6] = answer6;
+                let jsonString = JSON.stringify(part2);
+                sessionStorage.setItem('part2', jsonString);
+                
+
+                //parse in answer
+                let score = JSON.parse(sessionStorage.getItem('score'));
+
+    
+                if(answer6 == "5시간 미만" || answer6 == "5시간 이상 -6시간 미만" || answer6 == "9시간 이상"){
+                    score[2][6] = 1;
+                }
+                else{
+                    score[2][6] = 0;
+                }
+    
+                sessionStorage.setItem('score', JSON.stringify(score));
+                
+                if(answer6 == "6시간 이상 -7시간 미만" || answer6 == "7시간 이상 -9시간 미만"){
+                    location.href='part2_result.html';
+                    return;
+                }
+                location.href='part2_feedback.html';
+            });
+        </script>
+    
+    
+    
+    
+</body>
+</html>

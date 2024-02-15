@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 1</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/part_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 1. 인식</h1>
+        <p>Well / Poorly recognized</p>
+    </div><br><br>
+
+    <div id="textpos">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let temp = JSON.parse(sessionStorage.getItem('result'));
+            let textfile = document.createElement('p');
+            
+            if(temp[1]=='W') {
+                textfile.textContent = `당신의 COPM 유형 지표 중 인식 지표는 “Well recognized”에 해당됩니다.`;
+            }
+            else {
+                textfile.textContent = `당신의 COPM 유형 지표 중 인식 지표는 “Poorly recognized”에 해당됩니다.`;
+            }
+            document.getElementById('textpos').appendChild(textfile);
+        });
+    </script>
+    </div><br><br>
+    
+    <button onclick="location.href='../part2/part2_start.html'"  id="submitBtn" class="submitBtn">다음</button>
+    <br><br>
+</body>
+
+</html>

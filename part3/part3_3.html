@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 3</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/part_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 3. 운동</h1>
+        <p>Single / Cooperation</p>
+    </div>
+
+    <div class="content">
+        <form id="content" action="">
+
+            <p>3. 귀하가 선호하는 운동을 하지 못하는 이유는 무엇인가요? <b>(다중선택)</b></p>
+
+            <label><input type="checkbox" name="content" value="시간 부족">시간 부족</label><br>
+            <label><input type="checkbox" name="content" value="경제적 부담">경제적 부담</label><br>
+            <label><input type="checkbox" name="content" value="접근성">접근성</label><br>
+            <label><input type="checkbox" name="content" value="귀찮음">귀찮음</label><br>
+            <label><input type="checkbox" name="content" value="질병 혹은 부상">질병 혹은 부상</label><br>
+            <label><input type="checkbox" name="content" value="선호하는 운동을 하고 있음">선호하는 운동을 하고 있음</label><br>
+            <br>
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+
+                event.preventDefault();
+               
+                let answer_array = Array.from(document.querySelectorAll('#content input[name="content"]:checked'));
+                let answer3 = answer_array.map(checkbox => checkbox.value);
+
+                if(answer3.length==0){
+                    alert("질문에 응답해주세요.");
+                    return;
+                }
+
+                let part3 = JSON.parse(sessionStorage.getItem('part3'));
+                part3[3] = answer3;
+                let jsonString = JSON.stringify(part3);
+                sessionStorage.setItem('part3', jsonString);
+
+                location.href='part3_3_feedback.html'
+            });      
+    </script>
+
+</body>
+</html>  

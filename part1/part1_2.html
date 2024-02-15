@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 1</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/part_content.css">
+
+</head>
+
+
+<body>
+    <div class="header">
+        <h1>PART 1. 인식</h1>
+        <p>Well / Poorly recognized</p>
+    </div>
+    <br><br><br>
+    <div class="content">
+        <form id="content" action="">
+
+            <div id="question"></div><br><br>
+
+            <div id="imagepos"></div><br><br>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    let temp = JSON.parse(sessionStorage.getItem('part0'));
+                    if(!temp){
+                    alert('신체 정보가 없습니다. part 0 설문부터 진행해주세요.');
+                    location.href = "../part0.html";
+                    }   
+                    
+                    let questiontext = document.createElement('text');
+                    let imagefile = document.createElement('img');
+                    
+                    if(temp["성별"] == "남자") {
+                        questiontext.innerHTML = "2. 아래 거울을 보고 있는 남성이 비만이라고 생각하시나요?";
+                        imagefile.src = "../image/1-2-man.jpg";
+                        imagefile.alt = "남자 사진";
+                    } else {
+                        questiontext.innerHTML = "2. 아래 거울을 보고 있는 여성이 비만이라고 생각하시나요?";
+                        imagefile.src = "../image/1-2-woman.jpg";
+                        imagefile.alt = "여자 사진";
+                    }  
+                    document.getElementById('question').appendChild(questiontext);
+                    document.getElementById('imagepos').appendChild(imagefile);
+                });
+            </script>
+
+
+            <input type="radio" id="veryfat" name="content" value="매우 비만">
+            <label for="veryfat">매우 비만</label><br>
+    
+            <input type="radio" id="fat" name="content" value="약간 비만">
+            <label for="fat">약간 비만</label><br>
+    
+            <input type="radio" id="normal" name="content" value="보통">
+            <label for="normal">보통</label><br>
+    
+            <input type="radio" id="slim" name="content" value="약간 마름">
+            <label for="slim">약간 마름</label><br>
+    
+            <input type="radio" id="veryslim" name="content" value="매우 마름">
+            <label for="veryslim">매우 마름</label><br>
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+
+                //parse in part0
+                let storedData0 = sessionStorage.getItem('part0');
+                let parsedObj0 = JSON.parse(storedData0);
+
+                //ABC_temp1에 1-2번의 사용자 응답 저장
+                let answer2 = document.querySelector('#content input[name="content"]:checked');
+                if(!answer2){
+                    alert("질문에 응답해주세요.");
+                    return;
+                }
+
+                answer2 = answer2.value;
+
+                let part1 = JSON.parse(sessionStorage.getItem('part1'));
+                part1[2] = answer2;
+                
+                let jsonString = JSON.stringify(part1);
+                sessionStorage.setItem('part1', jsonString);
+
+    
+                //parse
+                let storedData = sessionStorage.getItem('part1');
+                let parsedObj = JSON.parse(storedData);
+                
+
+                //parse in ABC_a, ABC_result
+                let score = JSON.parse(sessionStorage.getItem('score'));
+                let result = JSON.parse(sessionStorage.getItem('result'));
+
+    
+                //part0의 성별에 따라 다른 part1-2의 정답
+                if(parsedObj0["성별"]=="남자"){
+                    if(parsedObj[2]=="매우 비만" || parsedObj[2]=="약간 비만"){
+                        score[1][2] = 0; //정답
+                    }
+                    else{
+                        score[1][2] = 1;
+                    }
+                }
+                else{
+                    if(parsedObj[2]=="약간 마름" || parsedObj[2]=="매우 마름"){
+                        score[1][2] = 0; //정답
+                    }
+                    else{
+                        score[1][2] = 1;
+                    }
+                }
+    
+                //part1의 유형 결정
+                if(score[1][1]==0 && score[1][2]==0) result[1]='W';
+                else result[1]='P';
+    
+    
+    
+                sessionStorage.setItem('score', JSON.stringify(score));
+                sessionStorage.setItem('result', JSON.stringify(result)); 
+                
+                location.href='part1_2_feedback.html'
+            });
+        </script>
+    
+    
+    
+    
+</body>
+</html>

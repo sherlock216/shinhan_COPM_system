@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PART 4</title>
+    <link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+    <link rel="stylesheet" href="../css/part_content.css">
+
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div><br><br>
+
+    <p id="textpos"></p>
+    <br><br>
+
+
+    <script>
+        let part4 = JSON.parse(sessionStorage.getItem('part4'));
+        let score = JSON.parse(sessionStorage.getItem('score'));
+
+        if (part4[4] == "먹지 않는다" || part4[4] == "1-2회") {
+            score[4][4] = 0;
+            document.getElementById("textpos").innerHTML = "단 음식을 많이 먹으면 칼로리 섭취가 늘기 때문에 비만해지기 쉽습니다. 단맛을 내는 음식은 ‘단순 당’을 가지게 되는데, 이것은 체내에서 혈당을 빠르게 올리고, 빠르게 떨어지게 되는데, 혈당이 떨어지면 공복감을 느끼고 과식 또는 폭식으로 이어지기 쉽습니다. 간식을 과다하게 섭취하지 않도록 주의하세요.";
+        }
+        else {
+            score[4][4] = 1;
+            document.getElementById("textpos").innerHTML = "단 음식을 많이 먹으면 칼로리 섭취가 늘기 때문에 비만해지기 쉽습니다. 단맛을 내는 음식은 ‘단순 당’을 가지게 되는데, 이것은 체내에서 혈당을 빠르게 올리고, 빠르게 떨어지게 되는데, 혈당이 떨어지면 공복감을 느끼고 과식 또는 폭식으로 이어지기 쉽습니다. 비만 예방 및 관리를 위해 간식 섭취를 줄이세요!";
+        }
+    
+        sessionStorage.setItem('score', JSON.stringify(score));
+    </script>
+
+
+    <button onclick="location.href='part4_5.html'" id="submitBtn" class="submitBtn">다음</button>
+    <br><br>
+</body>
+
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 2</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/part_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 2. 건강</h1>
+        <p>Healthy / Unhealthy</p>
+    </div>
+    <br><br><br>
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">5. 평소 일상생활 중 스트레스를 어느 정도 느끼고 있습니까?</label><br><br>
+
+            <input type="radio" id="always" name="content" value="대단히 많이 느낀다">
+            <label for="always">대단히 많이 느낀다</label><br>
+    
+            <input type="radio" id="often" name="content" value="많이 느끼는 편이다">
+            <label for="often">많이 느끼는 편이다</label><br>
+    
+            <input type="radio" id="some" name="content" value="조금 느끼는 편이다">
+            <label for="some">조금 느끼는 편이다</label><br>
+    
+            <input type="radio" id="never" name="content" value="거의 느끼지 않는다">
+            <label for="never">거의 느끼지 않는다</label><br>
+    
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+
+                let answer5 = document.querySelector('#content input[name="content"]:checked');
+                if(!answer5){
+                    alert("질문에 응답해주세요.");
+                    return;
+                }
+
+                answer5 = answer5.value;
+
+                let part2 = JSON.parse(sessionStorage.getItem('part2'));
+                part2[5] = answer5;
+                let jsonString = JSON.stringify(part2);
+                sessionStorage.setItem('part2', jsonString);
+                
+
+                //parse in answer
+                let score = JSON.parse(sessionStorage.getItem('score'));
+
+    
+                if(answer5 == "대단히 많이 느낀다" || answer5 == "많이 느끼는 편이다"){
+                    score[2][5] = 1;
+                }
+                else{
+                    score[2][5] = 0;
+                }
+    
+                sessionStorage.setItem('score', JSON.stringify(score));
+                
+                location.href='part2_6.html'
+            });
+        </script>
+    
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PART 4</title>
+    <link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+    <link rel="stylesheet" href="../css/part_content.css">
+    <style>
+        .submitBtn {
+            background-color: rgb(207, 115, 115);
+        }
+
+        .submitBtn:hover {
+            background-color: rgb(197, 37, 37);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div><br><br>
+
+    <div id="textpos">
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+
+                let result = JSON.parse(sessionStorage.getItem('result'));
+                let textfile = document.createElement('p');
+
+                if (result == 'I') {
+                    textfile.textContent = `당신의 COPM 유형 지표 중 식이 지표는 “Imbalanced”에 해당됩니다. 
+                                        간식과 음주를 줄이고 영양소를 고려한 규칙적인 식습관을 가지는 것은 비만 예방에 도움이 됩니다. 한번 변화를 시도해보는 것은 어떠신가요?`;
+                }
+
+                else {
+                    textfile.textContent = `당신의 COPM 유형 지표 중 식이 지표는 “Balanced”에 해당됩니다.
+                                        건강한 식이 습관을 잘 유지하고 있군요!`;
+                }
+
+                document.getElementById('textpos').appendChild(textfile);
+            });
+        </script>
+    </div><br><br>
+
+    <button type="submit" id="submitBtn" class="submitBtn">데이터 저장</button>
+    <br><br>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function () {
+            let data = {};
+            let part0 = JSON.parse(sessionStorage.getItem('part0'));
+            data['part0'] = part0;
+            let part1 = JSON.parse(sessionStorage.getItem('part1'));
+            data['part1'] = part1;
+            let part2 = JSON.parse(sessionStorage.getItem('part2'));
+            data['part2'] = part2;
+            let part3 = JSON.parse(sessionStorage.getItem('part3'));
+            data['part3'] = part3;
+            let part4 = JSON.parse(sessionStorage.getItem('part4'));
+            data['part4'] = part4;
+            let score = JSON.parse(sessionStorage.getItem('score'));
+            data['score'] = score;
+            let result = JSON.parse(sessionStorage.getItem('result'));
+            data['result'] = result;
+            let user_key = JSON.parse(sessionStorage.getItem('user_key'));
+            data['user_key'] = user_key;
+
+
+            fetch('../finish.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok. ');
+                    }
+                    return response.text();
+                })
+                .then(text => {
+                    alert(text);
+                    location.href = "../result.html";
+                })
+                .catch(error => alert('Error:' + error));
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>

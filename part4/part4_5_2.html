@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PART 4</title>
+    <link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+    <link rel="stylesheet" href="../css/part_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div>
+    <br>
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">5-2. 술을 마시는 날은 보통 어느 정도 마십니까?</label><br><br>
+
+            <input type="radio" id="1" name="content" value="소주 (잔 1병 = 7잔)" onclick="showField('소주', '잔')">
+            <label for="1">소주 (잔 1병 = 7잔)</label><br>
+
+            <input type="radio" id="2" name="content" value="맥주 (500cc 1캔 기준)" onclick="showField('맥주', '캔')">
+            <label for="2">맥주 (500cc 1캔 기준)</label><br>
+
+            <input type="radio" id="3" name="content" value="양주 (잔)" onclick="showField('양주', '잔')">
+            <label for="3">양주 (잔)</label><br>
+
+            <input type="radio" id="4" name="content" value="막걸리 (병)" onclick="showField('막걸리', '병')">
+            <label for="4">막걸리 (병)</label><br>
+
+            <input type="radio" id="5" name="content" value="와인 (잔)" onclick="showField('와인', '잔', '을')">
+            <label for="5">와인 (잔)</label><br><br>
+
+            <div id="add"></div>
+
+
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        function showField(drink, cup, pre = "를") {
+            let inputHTML = '<label for="add">' + drink + pre + ' 몇 ' + cup + ' 마시나요?</label><br>' +
+                '<input type="number" id="add" min="1"><br><br>';
+
+            document.getElementById('add').innerHTML = inputHTML;
+        }
+    </script>
+    
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            let answer52 = document.querySelector('#content input[name="content"]:checked');
+            let quantity = document.getElementById('add').querySelector('input[type="number"]');
+            if (!answer52 || !quantity) {
+                alert("질문에 응답해주세요.");
+                return;
+            }
+            answer52 = answer52.value;
+            quantity = quantity.value;
+            if(quantity === '' || quantity <= 0){
+                alert("1 이상의 값을 입력해주세요.");
+                return;
+            }
+
+            
+            let part4 = JSON.parse(sessionStorage.getItem('part4'));
+            let score = JSON.parse(sessionStorage.getItem('score'));
+            part4[52] = {"술종류": answer52, "양": quantity};
+
+
+            if (part4[51] != 3) {
+                if(part4[52]["술종류"] == "소주 (잔 1병 = 7잔)" && part4[52]["양"] >= 7){
+                    score[4][5] = 1;
+                }
+                else if(part4[52]["술종류"] == "맥주 (500cc 1캔 기준)" && part4[52]["양"] >= 3){
+                    score[4][5] = 1;
+                }
+                else if(part4[52]["술종류"] == "양주 (잔)" && part4[52]["양"] >= 3){
+                    score[4][5] = 1;
+                }
+                else if(part4[52]["술종류"] == "막걸리 (병)" && part4[52]["양"] >= 2){
+                    score[4][5] = 1;
+                }
+                else if(part4[52]["술종류"] == "와인 (잔)" && part4[52]["양"] >= 7){
+                    score[4][5] = 1;
+                }
+                
+            }
+            else {
+                score[4][5] = 1;
+            }
+            
+            sessionStorage.setItem('score', JSON.stringify(score));
+            sessionStorage.setItem('part4', JSON.stringify(part4));
+            location.href = 'part4_5_feedback.html'
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>

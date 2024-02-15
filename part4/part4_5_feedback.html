@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PART 4</title>
+    <link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+    <link rel="stylesheet" href="../css/part_content.css">
+
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div><br><br>
+
+    <p>음주는 술(알코올 1g=7kcal) 자체의 열량과 함께 먹는 안주의 열량까지 합쳐져 체중증가의 요인이 될 수 있습니다. 이는 건강 및 영양상태에 좋지 않은 영향을 줄 수 있으므로 적정 수준의 음주를 유지하는 것이 바람직합니다.<br>
+        적정 음주량은 <span style="color:red;">남성</span>은 하루에 2잔, <span style="color:red;">여성</span> 및 노인의 경우 1잔 정도이며, 이는 매일 같이 해당양의 음주를 권장 한다기 보다는 알코올 섭취를 하게 되는 경우 해당 양 정도를 마시는 것을 권장한다는 것으로 이해해야 합니다.        
+    </p>
+
+    <div class="image">
+        <img id="imagepos2" src="../image/4-5.jpg" alt="4-5그림">
+    </div>
+    <br><br>
+
+    <p id="textpos"></p>
+    <br><br>
+
+
+    <script>
+        let part4 = JSON.parse(sessionStorage.getItem('part4'));
+        let score_rare = JSON.parse(sessionStorage.getItem('score'));
+        let result = JSON.parse(sessionStorage.getItem('result'));
+
+        let score_result = 0;
+                score_rare = score_rare[4];
+                for (key in score_rare) {
+                    score_result += score_rare[key];
+                }
+
+                if(score_result >= 3){
+                    result[4] = 'I';
+                    document.getElementById("textpos").innerHTML = "비만 예방 및 관리를 위해 건강한 음주 습관을 형성하고 유지 할 필요가 있습니다.<br>음주 횟수와 양을 제한하고, 음주 시 고열량 안주의 섭취를 주의합니다. 술자리는 1차까지만 가집니다.<br>천천히 마시며, 섭취 시 물을 함께 섭취합니다. 음주 후 최소 3일의 회복기를 가집니다.";
+                }
+                else{
+                    result[4] = 'B';
+                    document.getElementById("textpos").innerHTML = "건강한 음주 습관을 지금처럼 잘 유지하세요.<br>술자리는 1차까지만 가집니다.<br>천천히 마시며, 섭취 시 물을 함께 섭취합니다. 음주 후 최소 3일의 회복기를 가집니다.";
+                }
+
+        sessionStorage.setItem('result', JSON.stringify(result));
+    </script>
+
+
+    <button onclick="location.href='part4_6.html'" id="submitBtn" class="submitBtn">다음</button>
+    <br><br>
+</body>
+
+
+</html>

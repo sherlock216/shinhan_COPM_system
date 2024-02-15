@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PART 3</title>
+    <link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+    <link rel="stylesheet" href="../css/part_content.css">
+
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 3. 운동</h1>
+        <p>Single / Cooperation</p>
+    </div><br><br>
+
+
+    <div id="textpos">
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                let temp = JSON.parse(sessionStorage.getItem('part3'));
+                let textfile = document.createElement('p');
+
+                if(temp[3].includes("시간 부족") || temp[3].includes("경제적 부담") || temp[3].includes("접근성") || temp[3].includes("귀찮음")){
+                    textfile.innerHTML = "따로 시간을 내서 신체 활동량을 늘리고자 하면 어려울 수 있으나, 일상 속에서 실천하면 쉽습니다.<br>1. 가까운 거리는 걸어서 이동하기<br>2. 엘리베이터 사용보다는 계단 사용하기<br>3. TV를 볼 때 스트레칭과 같은 간단한 실내 운동하기";
+                    if(temp[3].includes("질병 혹은 부상")){
+                        textfile.innerHTML = textfile.innerHTML.concat("<br>질병 혹은 부상 부위를 피해 할 수 있는 운동을 추천드리겠습니다.");
+                    }
+                    else{
+                        textfile.innerHTML = textfile.innerHTML.concat("<br>귀하에게 맞는 운동을 추천드리겠습니다.");
+                    }
+                }
+                else if(temp[3].includes("질병 혹은 부상")){
+                    textfile.innerHTML = textfile.innerHTML.concat("질병 혹은 부상 부위를 피해 할 수 있는 운동을 추천드리겠습니다.");
+                }
+                else{
+                    textfile.innerHTML = textfile.innerHTML.concat("귀하에게 맞는 운동을 추천드리겠습니다.");
+                }
+
+                document.getElementById('textpos').appendChild(textfile);
+            });
+
+        </script>
+    </div><br><br>
+
+    <button onclick="location.href='part3_3_feedback2.html'" id="submitBtn" class="submitBtn">다음</button>
+    <br><br>
+</body>
+
+
+</html>

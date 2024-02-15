@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 3</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/part_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 3. 운동</h1>
+        <p>Single / Cooperation</p>
+    </div>
+
+    <div class="content">
+        <form id="content" action="">
+
+            <p>2. 최근 6개월 동안 귀하가 하는 운동은 무엇인가요? 운동을 <b>모두</b> 고르세요.</p>
+
+            <label><input type="checkbox" name="content" value="헬스">헬스</label><br>
+            <label><input type="checkbox" name="content" value="축구">축구</label><br>
+            <label><input type="checkbox" name="content" value="필라테스">필라테스</label><br>
+            <label><input type="checkbox" name="content" value="홈트">홈트</label><br>
+            <label><input type="checkbox" name="content" value="요가">요가</label><br>
+            <label><input type="checkbox" name="content" value="자전거">자전거</label><br>
+            <label><input type="checkbox" name="content" value="골프">골프</label><br>
+            <label><input type="checkbox" name="content" value="수영">수영</label><br>
+            <label><input type="checkbox" name="content" value="걷기">걷기</label><br>
+            <label><input type="checkbox" name="content" value="크로스핏 또는 F45">크로스핏 또는 F45</label><br>
+            <label><input type="checkbox" name="content" value="배드민턴">배드민턴</label><br>
+            <label><input type="checkbox" name="content" value="스쿼시">스쿼시</label><br>
+            <label><input type="checkbox" name="content" value="테니스">테니스</label><br>
+            <label><input type="checkbox" name="content" value="풋살">풋살</label><br>
+            <label><input type="checkbox" name="content" value="스키 또는 스케이트">스키 또는 스케이트</label><br>
+            <label><input type="checkbox" name="content" value="서핑">서핑</label><br>
+            <label><input type="checkbox" name="content" value="PT">PT</label><br>
+            <label><input type="checkbox" name="content" value="조깅">조깅</label><br>
+            <label><input type="checkbox" name="content" value="GX">GX</label><br>
+            <label><input type="checkbox" name="content" value="등산">등산</label><br>
+            <label><input type="checkbox" name="content" value="댄스">댄스</label><br>
+            <label><input type="checkbox" name="content" value="무술(태권도, 주짓수)">무술(태권도, 주짓수)</label><br>
+            <label><input type="checkbox" name="content" value="승마">승마</label><br>
+            <label><input type="checkbox" name="content" value="클라이밍">클라이밍</label><br>
+            <label><input type="checkbox" name="content" value="없음">없음</label><br>
+            <br>
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+
+                event.preventDefault();
+               
+                let answer_array = Array.from(document.querySelectorAll('#content input[name="content"]:checked'));
+                let answer2 = answer_array.map(checkbox => checkbox.value);
+
+                if(answer2.length==0){
+                    alert("질문에 응답해주세요.");
+                    return;
+                }
+                if(answer2.includes('없음') && answer2.length > 1){
+                    alert("'없음' 선택 시 다른 문항은 선택 불가합니다.");
+                    return;
+                }
+
+                let part3 = JSON.parse(sessionStorage.getItem('part3'));
+                part3[2] = answer2;
+                let jsonString = JSON.stringify(part3);
+                sessionStorage.setItem('part3', jsonString);
+
+                location.href='part3_3.html'
+            });      
+    </script>
+
+</body>
+</html>  

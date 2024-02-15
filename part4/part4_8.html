@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PART 4</title>
+    <link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+    <link rel="stylesheet" href="../css/part_content.css">
+    <style>
+        .content input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div>
+
+    <div class="content">
+        <form id="content" action="">
+
+            <p>8. 귀하는 (알러지 외에) 개인적인 이유로 못 먹는 음식이 있나요?</p>
+            <p>못 먹는 음식이 있다면 그 음식의 이름을 적어주시고, 없다면 바로 다음 버튼을 눌러주세요.</p>
+
+
+            <label><input type="text" name="content"></label><br>
+            <br>
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function (event) {
+
+            event.preventDefault();
+
+            let answer8 = document.querySelector('input[name="content"]').value;
+
+            let part4 = JSON.parse(sessionStorage.getItem('part4'));
+            part4[8] = answer8;
+            let jsonString = JSON.stringify(part4);
+            sessionStorage.setItem('part4', jsonString);
+
+            location.href = 'part4_8_feedback.html'
+        });      
+    </script>
+
+</body>
+
+</html>

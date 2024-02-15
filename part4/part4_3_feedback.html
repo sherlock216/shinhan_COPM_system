@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PART 4</title>
+    <link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+    <link rel="stylesheet" href="../css/part_content.css">
+
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div><br><br>
+
+    <p id="textpos"></p>
+    <br><br>
+
+
+    <script>
+
+        let score = JSON.parse(sessionStorage.getItem('score'));
+
+        if (score[4][3] == 1) {
+            document.getElementById("textpos").innerHTML = "비만 예방 및 관리를 위해서는 필요한 영양소를 균형 있게 섭취하세요. 체중감량을 위해서는 섭취 열량을 줄여야 하지만, 6가지 식품군을 참고하여 골고루 섭취하여 필수영양소가 부족하지 않도록 골고루 식사를 하세요.";
+        }
+        else {
+            document.getElementById("textpos").innerHTML = "비만 예방 및 관리를 위해 지금의 균형 잡힌 식습관을 잘 유지하세요. 다음의 식품구성자전거 6가지 식품군을 참고하여 골고루 식사를 하세요.";
+        }
+
+    </script>
+
+
+    <div class="image">
+        <img id="imagepos2" src="../image/4-3.jpg" alt="4-3그림">
+    </div>
+    <br><br>
+
+    <div class="image">
+        <img id="imagepos3" scr="../image/4-3-y.jpg" alt="4-3-청년층 그림">
+    </div>
+    <br><br>
+
+    <script>
+        var part0 = JSON.parse(sessionStorage.getItem('part0'));
+        if (part0["청/중/장년층"] != "청년층") {
+            document.getElementById("imagepos3").setAttribute('src', '../image/4-3-o.jpg');
+            document.getElementById("imagepos3").setAttribute('alt', "4-3-중장년층 그림");
+        }
+        else {
+            document.getElementById("imagepos3").setAttribute('src', '../image/4-3-y.jpg');
+            document.getElementById("imagepos3").setAttribute('alt', "4-3-청년층 그림");
+        }
+    </script>
+
+
+
+
+
+    <p id="textpos2"></p>
+    <br><br>
+
+    <script>
+
+        if (part0["청/중/장년층"] != "청년층") {
+            document.getElementById("textpos2").innerHTML = "특히 고혈압을 예방 및 관리를 위한 대표적인 DASH (Dietary Approaches to Stop Hypertension) 식사법을 해보는 것은 어떨까요? 전곡류, 저지방 단백질 및 유제품, 채소, 과일, 견과류의 섭취는 늘리고 포화지방, 염분의 섭취는 줄임으로써 혈압 수치를 낮추는 식사법입니다";
+        }
+        else {
+            document.getElementById("textpos2").innerHTML = "채소, 과일, 완두콩, 콩, 곡물 위주의 섭취를 하며 붉은 고기 섭취는 줄이는 지중해식 식사법을 해보는 것은 어떨까요?";
+        }
+
+    </script>
+
+
+
+
+    <button onclick="location.href='part4_4.html'" id="submitBtn" class="submitBtn">다음</button>
+    <br><br>
+</body>
+
+
+</html>

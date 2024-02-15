@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 2</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/part_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 2. 건강</h1>
+        <p>Healthy / Unhealthy</p>
+    </div>
+
+    <div class="content">
+        <form id="content" action="">
+
+            <p>1. 다음 중 귀하가 진단받거나 치료중인 질환을 모두 고르시오.</p><br><br>
+
+            <label><input type="checkbox" name="content" value="고혈압">고혈압</label><br>
+            <label><input type="checkbox" name="content" value="당뇨병">당뇨병</label><br>
+            <label><input type="checkbox" name="content" value="고콜레스테혈증">고콜레스테혈증</label><br>
+            <label><input type="checkbox" name="content" value="고지혈증">고지혈증</label><br>
+            <label><input type="checkbox" name="content" value="뇌졸중">뇌졸중</label><br>
+            <label><input type="checkbox" name="content" value="심근경색">심근경색</label><br>
+            <label><input type="checkbox" name="content" value="기타(ex) 암, 관절염 등)">기타(ex) 암, 관절염 등)</label><br>
+            <label><input type="checkbox" name="content" value="없음">없음</label><br>
+
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+
+                event.preventDefault();
+               
+                let answer1_array = Array.from(document.querySelectorAll('#content input[name="content"]:checked'));
+                let answer1 = answer1_array.map(checkbox => checkbox.value);
+
+                if(answer1.length==0){
+                    alert("질문에 응답해주세요.");
+                    return;
+                }
+                if(answer1.includes('없음') && answer1.length > 1){
+                    alert("'없음' 선택 시 다른 문항은 선택 불가합니다.");
+                    return;
+                }
+
+                let part2 = { 1: answer1 };
+                let jsonString = JSON.stringify(part2);
+                sessionStorage.setItem('part2', jsonString);
+
+                //parse in ABC_a
+                let score = JSON.parse(sessionStorage.getItem('score'));
+                // part2는 정답시 0점, 오답시 점수 '1'점 추가입니다!!!
+                if(answer1.length == 0){
+                    score[2][1] = 0;
+                }
+                else {
+                    score[2][1] = 1;
+                }
+    
+                sessionStorage.setItem('score', JSON.stringify(score));
+
+                location.href='part2_2.html'
+            });      
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 4</title>
+<link rel="icon" type="image/jpg" href="../image/favicon.jpg">
+<link rel="stylesheet" href="../css/part_content.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>PART 4. 식이</h1>
+        <p>Balanced / Imbalanced</p>
+    </div>
+    <br>
+    <div class="content">
+        <form id="content" action="">
+
+            <label for="content">3. 일주일 중 귀하가 영양소를 고려하여 균형 잡힌 식사를 한 횟수는 얼마인가요?</label><br><br>
+            <p>균형 잡힌 식사란 매일 신선한 채소, 과일과 함께 곡류·고기·생선·달걀·콩류, 우유·유제품류 식품 및 물을 필요한 만큼 균형 있게 섭취하는 것을 의미합니다. 예를 들어, 한 끼니에 모든 영양소를 갖춘 균형 잡힌 식사를 하는 것을 포함하여 하루에 걸쳐 필요한 영양소를 섭취하는 것까지 균형 잡힌 식사로 정의합니다.</p>
+            <br><br>
+
+            <input type="radio" id="1" name="content" value="항상 그렇다(매일)">
+            <label for="1">항상 그렇다(매일)</label><br>
+    
+            <input type="radio" id="2" name="content" value="때때로 (주 5-6회)">
+            <label for="2">때때로 (주 5-6회)</label><br>
+
+            <input type="radio" id="3" name="content" value="보통 (주 3-4회)">
+            <label for="3">보통 (주 3-4회)</label><br>
+
+            <input type="radio" id="4" name="content" value="대체로 그렇지 않다">
+            <label for="4">대체로 그렇지 않다</label><br>
+
+            <input type="radio" id="5" name="content" value="그렇지 않다">
+            <label for="5">그렇지 않다</label><br>
+    
+            <button id="submitBtn" class="submitBtn">다음</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+
+                let answer3 = document.querySelector('#content input[name="content"]:checked');
+                let score = JSON.parse(sessionStorage.getItem('score'));
+                
+                if(!answer3){
+                    alert("질문에 응답해주세요.");
+                    return;
+                }
+
+                answer3 = answer3.value;
+
+                let part4 = JSON.parse(sessionStorage.getItem('part4'));
+                part4[3] = answer3;
+                
+                score[4][2] = 0; // 4-1,2문항의 점수를 [4][1]에 한번에 넣어버려서 통일성을 위해 [4][2]=0
+                if(answer3 == "대체로 그렇지 않다" || answer3 == "그렇지 않다"){
+                    score[4][3] = 1;
+                }
+                else{
+                    score[4][3] = 0;
+                }
+            
+                sessionStorage.setItem('part4', JSON.stringify(part4));
+                sessionStorage.setItem('score', JSON.stringify(score));
+                location.href='part4_3_feedback.html'
+            });
+        </script>
+    
+    
+    
+    
+</body>
+</html>
