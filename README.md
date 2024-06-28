@@ -61,6 +61,8 @@
 <img src="https://img.shields.io/badge/filezilla-BF0000?style=for-the-badge&logo=filezilla&logoColor=white">
 <img src="https://img.shields.io/badge/phpmyadmin-6C78AF?style=for-the-badge&logo=phpmyadmin&logoColor=white">
 <p>(phpmyadmin은 데이터베이스 확인용도로, cafe24와 연결돼있음)</p>
+<img src="https://img.shields.io/badge/kakaotalk-ffcd00?style=for-the-badge&logo=kakaotalk&logoColor=black">
+<p>(카카오톡 챗봇 서비스 이용)</p>
 <br>
 
 <h3>Others</h3>
