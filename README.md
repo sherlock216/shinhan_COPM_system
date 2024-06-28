@@ -1,39 +1,32 @@
-<h1>Resilience Diary</h1>
-<img src="public/image/chat1.png" alt="Example Image" style="width:128px;">
+<h1>COPM system</h1>
 <br>
 <br>
 
 <h2>Project Overview</h2>
-<p>다이어리와 채팅방 모바일 앱 구현</p>
-<p>개발기간: 2024.4.29 ~ 2024.6.28 </p>
+<p>OO대학교 건강 챗봇, 비만관리유형 확인 테스트 제작</p>
+<p>개발기간: 2024.1.2 ~ 2024.2.19 </p>
 <br>
 <br>
 
 <h2>배포 주소</h2>
-<p>주소: https://diary.nehub.info</p>
-<p>Figma: https://www.figma.com/proto/AZJyaKBO3pkLgJBjabfONx/%EA%B1%B4%EA%B0%95%EC%95%B1%EB%93%A4?page-id=0%3A1&type=design&node-id=1-2&viewport=372%2C203%2C0.2&t=N5AAETFtl9brMivj-1&scaling=scale-down&starting-point-node-id=1%3A2&mode=design</p>
+<p>주소: https://developnehub.cafe24.com</p>
+<span>카카오톡 챗봇으로만 접근 가능하며 단순히 링크 접속으로는 접속되지 않습니다.</span>
+<span>연구가 진행 중인 상황을 고려하여 챗봇 링크는 공개되지 않습니다.</span>
 <br>
 <br>
 
 <h2>시작 가이드</h2>
 <h3>설치 방법</h3>
-<p>프로그래시브 웹앱(pwa)방식으로 구현되어, 스토어에서 앱 설치하는 방식이 아닌 웹 브라우저에서 홈 화면에 추가하는 방식입니다.</p>
-<p>안드로이드 모바일: 홈 화면에 추가</p>
-<p>PC: 오른쪽 위 설치 버튼</p>
-<p>앱 설치를 권장드리나 웹 사이트에서도 작동합니다.</p>
-<br>
+<p>카카오톡 친구추가하여 챗봇 시작</p>
+<img src="https://github.com/sherlock216/shinhan_COPM_system/assets/86870994/c8d7afc3-bd81-46c4-afce-8a37d4c15bbb" alt="image">
 
-<h3>테스트 샘플 데이터</h3>
-<p>Private for Security</p>
 <br>
 
 <h3>기능 소개</h3>
 <ol>
-  <li>첫 번째 채팅방(나의 일지): 특정 시간에 매일 문자가 오도록 구현한 혼자의 채팅방(node schedule)</li>
-  <li>두 번째 채팅방(동료의 공간): 같은 그룹인 사람들끼리 묶인 방(socket.io)</li>
-  <li>세 번째 채팅방(상담받고 싶어요): 상담사(admin)와의 1대1방(socket.io)</li>
-  <li>우측 상단 달력 구현(Fullcalendar, javascript module)</li>
-  <li>실시간 푸시 알림 구현(google FCM)</li>
+  <li>카카오톡 챗봇 기능 이용 가능(카드뉴스 보기, 전화 연결, 테스트 페이지 연결 등)</li>
+  <li>테스트 페이지로 이동 시 테스트 가능</li>
+  <li>테스트 페이지에서 결과보기를 누르면 결과 유형 확인 가능</li>
 </ol>
 <br>
 <br>
@@ -71,5 +64,5 @@
 <br>
 
 <h2>유의사항</h2>
-<p>웹 호스팅은 Cafe24로 하였고, phpmyadmin있습니다.</p>
+<p>웹 호스팅은 Cafe24로 하였고, phpmyadmin 으로 DB 관리하였습니다.</p>
 
